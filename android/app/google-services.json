@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "419206825592",
+    "project_id": "tasleem-al-quran",
+    "storage_bucket": "tasleem-al-quran.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419206825592:android:0899cccc4382c9862dcf8d",
+        "android_client_info": {
+          "package_name": "com.taq.tasleem_al_quran"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "419206825592-rpkgugvp7mmmmfc5lmo851errp5et5g5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRup403rx7f4j2-LlCJPYQaRfqxEb3qpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "419206825592-rpkgugvp7mmmmfc5lmo851errp5et5g5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
