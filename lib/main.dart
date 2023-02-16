@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
         Register.id: (context) => const Register(),
         //Compass.id: (context) =>  Compass(),
         PrayTimes.id: (context) => PrayTimes(),
-        Calendar.id: (context) =>  Calendar(),
+        //Calendar.id: (context) =>  Calendar(),
         UserData.id: (context) => const UserData(),
         AdminPage.id: (context) => const AdminPage(),
         NamazLoc.id: (context) => NamazLoc(),

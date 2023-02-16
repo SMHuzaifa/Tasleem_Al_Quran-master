@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 
@@ -530,7 +531,15 @@ class _HomeState extends State<Home> {
                   }),
                   _buildDivider(),
                   _buildRow(Icons.calendar_month, "Ramazan Calendar", () {
-                    Navigator.pushNamed(context, Calendar.id);
+                   // Navigator.pushNamed(context, Calendar.id);
+                    Fluttertoast.showToast(
+                        msg:'Coming Soon',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16);
                   }),
                   _buildDivider(),
                   _buildRow(
@@ -547,18 +556,22 @@ class _HomeState extends State<Home> {
 
                   }, showBadge: true),
                   _buildDivider(),
-                  _buildRow(Icons.settings, "Settings", () {
-                    print('Tapped setting');
-                  }),
-                  _buildDivider(),
-                  _buildRow(Icons.email, "Contact us", () {
-                    print('Tapped contct');
-                  }),
-                  _buildDivider(),
-                  _buildRow(Icons.info_outline, "Help", () {
-                    print('Tapped help');
-                  }),
-                  _buildDivider(),
+                  // // _buildRow(Icons.settings, "Settings", () {
+                  // //   print('Tapped setting');
+                  // // }),
+                  // // _buildDivider(),
+                  // // _buildRow(Icons.email, "Contact us", () {
+                  // //   print('Tapped contct');
+                  // // }),
+                  // // _buildDivider(),
+                  // // _buildRow(Icons.info_outline, "Help", () {
+                  // //   print('Tapped help');
+                  // }),
+                  SizedBox(
+                    height: 350,
+                  ),
+                  Text("Powered By IT Artificer",style: TextStyle(color: Colors.white),)
+
                 ],
               ),
             ),

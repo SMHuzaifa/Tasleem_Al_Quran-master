@@ -84,7 +84,7 @@ dev_dependencies:
 
 
 flutter_native_splash:
-  image: assets/ic_launcher.png
+  image: assets/Group 3.png
   color: "#FFFFFF"
 
 

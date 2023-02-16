@@ -8,7 +8,7 @@
         <package android:name="com.whatsapp" />
     </queries>
    <application
-        android:label="tasleem_al_quran"
+        android:label="TAQ"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

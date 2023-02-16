@@ -2,6 +2,7 @@ import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -335,8 +336,14 @@ class _RegisterState extends State<Register> {
 
                                                   showSpinner = false;
                                                 });
-                                                Utils().toastMessage(
-                                                    'Registration Successful');
+                                                Fluttertoast.showToast(
+                                                    msg:"Registration Successful",
+                                                    toastLength: Toast.LENGTH_SHORT,
+                                                    gravity: ToastGravity.CENTER,
+                                                    timeInSecForIosWeb: 1,
+                                                    backgroundColor: Colors.black,
+                                                    textColor: Colors.white,
+                                                    fontSize: 16);
                                               }).onError((error, stackTrace){
                                                 setState(() {
                                                   showSpinner = false;
