@@ -48,113 +48,139 @@ class _PrayTimesState extends State<PrayTimes> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
-                    child: Row(
+                    child: Column(
                       children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Card(
-                              color: const Color.fromRGBO(10, 91, 144, 1),
-                              elevation: 3,
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    'Fajr',
-                                    style: TextStyle(
-                                        fontSize: 30, color: Colors.white),
-                                  ),
-                                  const SizedBox(
-                                    height: 50,
-                                    width: 178,
-                                  ),
-                                  Text(
-                                    snapshot.data.data.timings.fajr,
-                                    style: const TextStyle(
-                                        fontSize: 30, color: Colors.white),
-                                  ),
-                                ],
-                              ),
+                        Container(
+                          color: const Color.fromRGBO(10, 91, 144, 1),
+                          height: 65,
+                          child: ListTile(
+                            isThreeLine: true,
+
+                            title: const Text(
+                              "Fajr",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25),
                             ),
-                            Card(
-                              color: const Color.fromRGBO(10, 91, 144, 1),
-                              elevation: 3,
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    'Dhuhr',
-                                    style: TextStyle(
-                                        fontSize: 30, color: Colors.white),
-                                  ),
-                                  const SizedBox(
-                                    height: 50,
-                                    width: 150,
-                                  ),
-                                  Text(snapshot.data.data.timings.dhuhr,
-                                      style: const TextStyle(
-                                          fontSize: 30, color: Colors.white)),
-                                ],
-                              ),
+
+                            subtitle: Text(snapshot.data.data.timings.fajr,
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
+                            trailing: const Icon(
+                              Icons.sunny,
+                              color: Colors.yellow,
                             ),
-                            Card(
-                              color: const Color.fromRGBO(10, 91, 144, 1),
-                              elevation: 3,
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    'Asr',
-                                    style: TextStyle(
-                                        fontSize: 30, color: Colors.white),
-                                  ),
-                                  const SizedBox(
-                                    height: 50,
-                                    width: 185,
-                                  ),
-                                  Text(snapshot.data.data.timings.asr,
-                                      style: const TextStyle(
-                                          fontSize: 30, color: Colors.white)),
-                                ],
-                              ),
+                            // dense: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          color: const Color.fromRGBO(10, 91, 144, 1),
+                          height: 65,
+                          child: ListTile(
+                            isThreeLine: true,
+
+                            title: const Text(
+                              "Dhuhr",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25),
                             ),
-                            Card(
-                              color: const Color.fromRGBO(10, 91, 144, 1),
-                              elevation: 3,
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    'Maghrib',
-                                    style: TextStyle(
-                                        fontSize: 30, color: Colors.white),
-                                  ),
-                                  const SizedBox(
-                                    height: 50,
-                                    width: 120,
-                                  ),
-                                  Text(snapshot.data.data.timings.maghrib,
-                                      style: const TextStyle(
-                                          fontSize: 30, color: Colors.white)),
-                                ],
-                              ),
+
+                            subtitle: Text(snapshot.data.data.timings.dhuhr,
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
+                            trailing: const Icon(
+                              Icons.sunny,
+                              color: Colors.yellow,
                             ),
-                            Card(
-                              color: const Color.fromRGBO(10, 91, 144, 1),
-                              elevation: 3,
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    'Isha',
-                                    style: TextStyle(
-                                        fontSize: 30, color: Colors.white),
-                                  ),
-                                  const SizedBox(
-                                    height: 50,
-                                    width: 173,
-                                  ),
-                                  Text(snapshot.data.data.timings.isha,
-                                      style: const TextStyle(
-                                          fontSize: 30, color: Colors.white)),
-                                ],
-                              ),
+                            // dense: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          color: const Color.fromRGBO(10, 91, 144, 1),
+                          height: 65,
+                          child: ListTile(
+                            isThreeLine: true,
+
+                            title: const Text(
+                              "Asr",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25),
                             ),
-                          ],
+
+                            subtitle: Text(snapshot.data.data.timings.asr,
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
+                            trailing: const Icon(
+                              Icons.sunny_snowing,
+                              color: Colors.yellow,
+                            ),
+                            // dense: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          color: const Color.fromRGBO(10, 91, 144, 1),
+                          height: 65,
+                          child: ListTile(
+                            isThreeLine: true,
+
+                            title: const Text(
+                              "Maghrib",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25),
+                            ),
+
+                            subtitle: Text(snapshot.data.data.timings.maghrib,
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
+                            trailing: const Icon(
+                              Icons.sunny_snowing,
+                              color: Colors.yellow,
+                            ),
+                            // dense: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          color: const Color.fromRGBO(10, 91, 144, 1),
+                          height: 65,
+                          child: ListTile(
+                            isThreeLine: true,
+
+                            title: const Text(
+                              "Isha",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25),
+                            ),
+
+                            subtitle: Text(snapshot.data.data.timings.isha,
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
+                            trailing: const Icon(
+                              Icons.sunny_snowing,
+                              color: Colors.yellow,
+                            ),
+                            // dense: true,
+                          ),
                         ),
                       ],
                     ),

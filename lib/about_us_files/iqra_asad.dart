@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasleem_al_quran/slide_images.dart';
 
 class IqraAsad extends StatelessWidget {
-  static String id = "IqraSaad_id";
+  static String id = "IqraAsad_id";
   const IqraAsad({Key? key}) : super(key: key);
 
   @override

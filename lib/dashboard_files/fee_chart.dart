@@ -1,8 +1,13 @@
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tasleem_al_quran/slide_images.dart';
 
+import '../admin_files/admin_login_page.dart';
 import '../bottom_navigation_bar.dart';
+import '../namaz_timing_file/namaz_loc_check.dart';
+import '../qibla_files/compass_file.dart';
 
 class Fee extends StatefulWidget {
   const Fee({Key? key}) : super(key: key);
@@ -13,23 +18,9 @@ class Fee extends StatefulWidget {
 }
 
 class _FeeState extends State<Fee> {
-  @override
-  void initState() {
-    super.initState();
-    BackButtonInterceptor.add(myInterceptor);
-  }
+  final Color primary = const Color.fromRGBO(10, 91, 144, 1);
 
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
-
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.pop(context);
-    Navigator.pushNamed(context, MyNavigationBar.id); // Do some stuff.
-    return true;
-  }
+  final Color active = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +34,7 @@ class _FeeState extends State<Fee> {
         backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
         //automaticallyImplyLeading: false,
       ),
+      drawer: buildDrawer(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         tooltip: 'Contact Us',
@@ -61,7 +53,7 @@ class _FeeState extends State<Fee> {
                 child: SlideImage(),
               ),
               const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 15, 150, 10),
+                  padding: EdgeInsets.fromLTRB(0, 15, 150, 2),
                   child: Text(
                     'FEE STRUCTURE',
                     style: TextStyle(
@@ -69,13 +61,9 @@ class _FeeState extends State<Fee> {
                         color: Color.fromRGBO(10, 91, 144, 0.8),
                         fontWeight: FontWeight.bold),
                   )),
-              Image.asset(
-                'assets/fee-banner.png',
-                width: 353,
-                height: 100,
-              ),
+
               const Padding(
-                  padding: EdgeInsets.fromLTRB(10, 15, 15, 0),
+                  padding: EdgeInsets.fromLTRB(10, 7, 15, 0),
                   child: Text(
                     'Quranic education must be much affordable to all so that everyone can learn, recite and understand Quran easily and effectively.\n\n'
                     'There will be free trial sessions for three days. After the satisfaction of our high-quality services, and our highly qualified Quranic Teaching staff, the following fee structure will be enforced on monthly basis.\n\n'
@@ -125,11 +113,11 @@ class _FeeState extends State<Fee> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(3, 15, 50, 0),
+                margin: const EdgeInsets.fromLTRB(1, 15, 60, 0),
                 child: Table(
                   defaultColumnWidth: const FixedColumnWidth(90.0),
                   border: TableBorder.all(
-                      color: Colors.black, style: BorderStyle.solid, width: 2),
+                      color: Colors.black, style: BorderStyle.solid, width: 1),
                   children: [
                     TableRow(children: [
                       Column(children: const [
@@ -244,14 +232,14 @@ class _FeeState extends State<Fee> {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.fromLTRB(2, 15, 120, 0),
+                padding: EdgeInsets.fromLTRB(5, 15, 110, 0),
                 child: Text(
                   'Get Register for a Free Trial',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.fromLTRB(2, 15, 120, 0),
+                padding: EdgeInsets.fromLTRB(8, 15, 110, 0),
                 child: Text(
                   '2 Days & 3 Days/Weekend Packages:',
                   style: TextStyle(
@@ -268,7 +256,7 @@ class _FeeState extends State<Fee> {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.fromLTRB(2, 15, 120, 0),
+                padding: EdgeInsets.fromLTRB(8, 15, 120, 0),
                 child: Text(
                   'Class Type: 1 on 1 Live class.\nClass Duration: 45 Minutes/Day.',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -279,7 +267,7 @@ class _FeeState extends State<Fee> {
                 child: Table(
                   defaultColumnWidth: const FixedColumnWidth(110.0),
                   border: TableBorder.all(
-                      color: Colors.black, style: BorderStyle.solid, width: 2),
+                      color: Colors.black, style: BorderStyle.solid, width: 1),
                   children: [
                     TableRow(children: [
                       Column(children: const [
@@ -306,7 +294,7 @@ class _FeeState extends State<Fee> {
                         )
                       ]),
                       Column(children: const [Text('USD')]),
-                      Column(children: const [Text('40/-')]),
+                      Column(children: const [Text('   40/-')]),
                     ]),
                     TableRow(children: [
                       Column(children: const [
@@ -355,5 +343,125 @@ class _FeeState extends State<Fee> {
         ),
       ),
     );
+  }
+  buildDrawer() {
+    final auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    return ClipPath(
+      clipper: OvalRightBorderClipper(),
+      child: Drawer(
+        child: Container(
+          padding: const EdgeInsets.only(left: 16.0, right: 40),
+          decoration: BoxDecoration(
+              color: primary,
+              boxShadow: const [BoxShadow(color: Colors.black45)]),
+          width: 300,
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(height: 80.0),
+                  _buildRow(Icons.compass_calibration, "Qibla Direction", () {
+                    Navigator.pushNamed(context, Compass.id);
+                  }),
+                  _buildDivider(),
+                  _buildRow(Icons.calendar_month, "Ramazan Calendar", () {
+                    // Navigator.pushNamed(context, Calendar.id);
+                    Fluttertoast.showToast(
+                        msg:'Coming Soon',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16);
+                  }),
+                  _buildDivider(),
+                  _buildRow(
+                    Icons.access_time_filled,
+                    "Namaz Timing",
+                        () {
+                      Navigator.pushNamed(context, NamazLoccheck.id);
+                    },
+                    showBadge: true,
+                  ),
+                  _buildDivider(),
+                  _buildRow(Icons.admin_panel_settings, "For Admin", () {
+                    Navigator.pushNamed(context, AdminPage.id);
+
+                  }, showBadge: true),
+                  _buildDivider(),
+                  // // _buildRow(Icons.settings, "Settings", () {
+                  // //   print('Tapped setting');
+                  // // }),
+                  // // _buildDivider(),
+                  // // _buildRow(Icons.email, "Contact us", () {
+                  // //   print('Tapped contct');
+                  // // }),
+                  // // _buildDivider(),
+                  // // _buildRow(Icons.info_outline, "Help", () {
+                  // //   print('Tapped help');
+                  // }),
+                  SizedBox(
+                    height: 350,
+                  ),
+                  Text("Powered By IT Artificer",style: TextStyle(color: Colors.white),)
+
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Divider _buildDivider() {
+    return Divider(
+      color: active,
+    );
+  }
+
+  Widget _buildRow(IconData icon, String title, onTap,
+      {bool showBadge = false}) {
+    final TextStyle tStyle = TextStyle(color: active, fontSize: 16.0);
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Row(children: [
+        Icon(
+          icon,
+          color: active,
+        ),
+        const SizedBox(width: 10.0),
+        InkWell(
+          onTap: onTap,
+          child: Text(
+            title,
+            style: tStyle,
+          ),
+        ),
+        //const Spacer(),
+      ]),
+    );
+  }
+}
+
+class OvalRightBorderClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+    path.lineTo(0, 0);
+    path.lineTo(size.width - 40, 0);
+    path.quadraticBezierTo(
+        size.width, size.height / 4, size.width, size.height / 2);
+    path.quadraticBezierTo(size.width, size.height - (size.height / 4),
+        size.width - 40, size.height);
+    path.lineTo(0, size.height);
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return true;
   }
 }

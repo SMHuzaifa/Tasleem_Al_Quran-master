@@ -1,74 +1,4 @@
-// // //
-// // //
-// // //
-// // // import 'package:flutter/cupertino.dart';
-// // // import 'package:flutter/material.dart';
-// // // import 'package:tasleem_al_quran/about_us.dart';
-// // // import 'package:tasleem_al_quran/pag3.dart';
-// // //
-// // // import 'home.dart';
-// // // import 'my_menue.dart';
-// // //
-// // // class MyNavigationBar extends StatelessWidget {
-// // //   const MyNavigationBar({Key? key}) : super(key: key);
-// // //
-// // //   @override
-// // //   Widget build(BuildContext context) {
-// // //     return MaterialApp(
-// // //       home: CupertinoTabScaffold(tabBar: CupertinoTabBar(
-// // //         activeColor: Colors.red,
-// // //           inactiveColor: const Color.fromRGBO(10, 91, 144, 1),
-// // //
-// // //           items: const <BottomNavigationBarItem>[
-// // //             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home",),
-// // //             BottomNavigationBarItem(
-// // //                 icon: Icon(Icons.person_outline_rounded), label: "About Us"),
-// // //             BottomNavigationBarItem(
-// // //                 icon: Icon(Icons.play_lesson), label: "Courses"),
-// // //             BottomNavigationBarItem(
-// // //                 icon: Icon(Icons.payments), label: "Fee Chart"),
-// // //             BottomNavigationBarItem(
-// // //                 icon: Icon(Icons.app_registration), label: "Register"),
-// // //           ]
-// // //       ),
-// // //         tabBuilder: (context, index) {
-// // //           switch (index) {
-// // //             case 0:
-// // //               return CupertinoTabView(builder: (context) {
-// // //                 return  CupertinoPageScaffold(child: MyMenu(),);
-// // //               });
-// // //             case 1:
-// // //               return CupertinoTabView(builder: (context) {
-// // //                 return    const CupertinoPageScaffold(child: HomePage(),);
-// // //               });
-// // //             case 2:
-// // //               return CupertinoTabView(builder: (context) {
-// // //                 return   CupertinoPageScaffold(child: Page2(),);
-// // //               });
-// // //             case 3:
-// // //               return CupertinoTabView(builder: (context) {
-// // //                 return   const CupertinoPageScaffold(child: Page3());
-// // //               });
-// // //             case 4:
-// // //               return CupertinoTabView(builder: (context) {
-// // //                 return   const CupertinoPageScaffold(child: Page3());
-// // //               });
-// // //               default: return CupertinoTabView(builder: (context){
-// // //                 return CupertinoPageScaffold(child: MyMenu(),);
-// // //           });
-// // //         }
-// // //
-// // //
-// // // }),
-// // //     );
-// // // }}
-// //
-// //
-// //
-// //
-// //
-// //
-// //
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -95,7 +25,7 @@ class MyNavigationBar extends StatefulWidget {
 
 class _MyNavigationBarState extends State<MyNavigationBar> {
   bool err = false;
-  String msgErr = '';
+  String msgErr = 'Error';
   int _currentIndex = 0;
 
 // all pages

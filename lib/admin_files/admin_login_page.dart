@@ -27,73 +27,53 @@ class _AdminPageState extends State<AdminPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  @override
-  void initState() {
-    super.initState();
-    BackButtonInterceptor.add(myInterceptor);
-  }
-
 
   @override
   void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-  }
-
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.pop(context);
-    Navigator.pushNamed(context, MyNavigationBar.id); // Do some stuff.
-    return true;
   }
 
   bool _obscureText = true;
 
   final _auth = FirebaseAuth.instance;
   void login() {
-
-
-      _auth
-          .signInWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text.toString())
-          .then((value) {
-        setState(() {
-          _passwordController.clear();
-          showSpinner = false;
-        });
-        Fluttertoast.showToast(
-            msg: "Login Successfully",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0
-        );
-        // Utils().toastMessage(value.user!.emailVeri.toString());
-        Navigator.push(context, MaterialPageRoute(builder:(context)=>const UserData()));
-
-      })
-          .onError((error, stackTrace) {
-        setState(() {
-          showSpinner = false;
-        });
-        debugPrint(error.toString());
-        // Utils().toastMessage(error.toString());
-        Fluttertoast.showToast(
-            msg: "Bad Email or Password",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0
-        );
-
+    _auth
+        .signInWithEmailAndPassword(
+            email: _emailController.text,
+            password: _passwordController.text.toString())
+        .then((value) {
+      setState(() {
+        _passwordController.clear();
+        showSpinner = false;
       });
-
+      Fluttertoast.showToast(
+          msg: "Login Successfully",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      // Utils().toastMessage(value.user!.emailVeri.toString());
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const UserData()));
+    }).onError((error, stackTrace) {
+      setState(() {
+        showSpinner = false;
+      });
+      debugPrint(error.toString());
+      // Utils().toastMessage(error.toString());
+      Fluttertoast.showToast(
+          msg: "Bad Email or Password",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    });
   }
 
   // void islogin(BuildContext context){
@@ -107,7 +87,6 @@ class _AdminPageState extends State<AdminPage> {
   //     Navigator.pushNamed(context, AdminPage.id);
   //   }
   // }
-
 
   @override
   Widget build(BuildContext context) {
@@ -195,9 +174,11 @@ class _AdminPageState extends State<AdminPage> {
                                       label: const Text('Email'),
                                       hintText: 'Enter Your Email',
                                       border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           borderSide: const BorderSide(
-                                            color: Color.fromRGBO(10, 91, 144, 1),
+                                            color:
+                                                Color.fromRGBO(10, 91, 144, 1),
                                           )),
                                     ),
                                   ),
@@ -235,9 +216,11 @@ class _AdminPageState extends State<AdminPage> {
                                       label: const Text('Password'),
                                       hintText: 'Password',
                                       border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           borderSide: const BorderSide(
-                                            color: Color.fromRGBO(10, 91, 144, 1),
+                                            color:
+                                                Color.fromRGBO(10, 91, 144, 1),
                                           )),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
@@ -264,19 +247,18 @@ class _AdminPageState extends State<AdminPage> {
                                               borderRadius:
                                                   BorderRadius.circular(13.0),
                                             ),
-                                            backgroundColor: const Color.fromRGBO(
-                                                10, 91, 144, 1),
+                                            backgroundColor:
+                                                const Color.fromRGBO(
+                                                    10, 91, 144, 1),
                                           ),
                                           onPressed: () {
                                             if (_formKey.currentState!
                                                 .validate()) {
                                               setState(() {
-
-                                                showSpinner =true;
+                                                showSpinner = true;
                                               });
 
-                                             login();
-
+                                              login();
                                             }
                                           },
                                           child: const Text(

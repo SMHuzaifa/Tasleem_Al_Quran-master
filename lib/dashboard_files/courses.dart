@@ -1,9 +1,14 @@
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tasleem_al_quran/dashboard_files/about_us.dart';
 import 'package:tasleem_al_quran/slide_images.dart';
 
+import '../admin_files/admin_login_page.dart';
 import '../bottom_navigation_bar.dart';
+import '../namaz_timing_file/namaz_loc_check.dart';
+import '../qibla_files/compass_file.dart';
 
 class Courses extends StatefulWidget {
   static String id = "Courses_id";
@@ -14,23 +19,10 @@ class Courses extends StatefulWidget {
 }
 
 class _CoursesState extends State<Courses> {
-  @override
-  void initState() {
-    super.initState();
-    BackButtonInterceptor.add(myInterceptor);
-  }
+  final Color primary = const Color.fromRGBO(10, 91, 144, 1);
 
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
+  final Color active = Colors.white;
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.pop(context);
-    Navigator.pushNamed(context, MyNavigationBar.id); // Do some stuff.
-    return true;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +36,7 @@ class _CoursesState extends State<Courses> {
         backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
         //automaticallyImplyLeading: false,
       ),
+      drawer: buildDrawer(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         tooltip: 'Contact Us',
@@ -84,7 +77,7 @@ class _CoursesState extends State<Courses> {
                     '● Learn how to recite and memorize Quran\n   in online classes.\n\n'
                     '● Our Quran Lessons for kids, adults and\n   females with live tutors over Skype and\n   zoom. \n\n',
                     textAlign: TextAlign.justify,
-                    style: TextStyle(fontSize: 17),
+                    style: TextStyle(fontSize: 17,height: 1),
                   )),
               const Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 15, 0),
@@ -107,151 +100,277 @@ class _CoursesState extends State<Courses> {
                       color: Colors.green),
                 ),
               ),
-              Card(
-                color: Colors.white60,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                elevation: 2,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(7, 15, 0, 0),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/learningQuranIcon.png'),
-                      const Text(
-                        'Learn Noorani Qaida',
-                        style: TextStyle(
-                            color: Color.fromRGBO(10, 91, 144, 1),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      )
-                    ],
-                  ),
+              Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                     height: 80,
+                      width: 150,
+                      child: Card(
+                        color: const Color.fromRGBO(10, 91, 144, 1),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                        elevation: 2,
+                        child: const Padding(
+                          padding: EdgeInsets.fromLTRB(18, 15, 0, 0),
+                          child: Text(
+                            ' Learn\n Noorani Qaida',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
 
-                ),
-              ),
-              Card(
-                color: Colors.white60,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                elevation: 2,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(7, 15, 0, 0),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/prayer.png'),
-                      const Text(
-                        'Learn Rules of Tajweed',
-                        style: TextStyle(
-                            color: Color.fromRGBO(10, 91, 144, 1),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      )
-                    ],
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Card(
-                color: Colors.white60,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                elevation: 2.0,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(7, 15, 0, 0),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/strongbeliefIcon.png'),
-                      const Text(
-                        'Qur’an For Beginners',
-                        style: TextStyle(
-                            color: Color.fromRGBO(10, 91, 144, 1),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      )
-                    ],
+                  Expanded(
+                    child: SizedBox(
+             height: 80,
+                      width: 150,
+                      child: Card(
+                        color: const Color.fromRGBO(10, 91, 144, 1),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                        elevation: 2,
+                        child: const Padding(
+                          padding: EdgeInsets.fromLTRB(18, 15, 0, 0),
+                          child: Text(
+                            ' Learn Rules\n of Tajweed',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              Card(
-                color: Colors.white60,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                elevation: 2.0,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(7, 15, 0, 0),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/learningQuranIcon.png'),
-                      const Text(
-                        'Learn Hifz-ul-Quran Online',
-                        style: TextStyle(
-                            color: Color.fromRGBO(10, 91, 144, 1),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      )
-                    ],
+
+              Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: 80,
+                      width: 150,
+                      child: Card(
+                        color: const Color.fromRGBO(10, 91, 144, 1),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                        elevation: 2.0,
+                        child: const Padding(
+                          padding: EdgeInsets.fromLTRB(18, 15, 0, 0),
+                          child: Text(
+                            ' Qur’an\n For Beginners',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
+                        ),
+                      ),
+
+                    ),
                   ),
-                ),
-              ),
-              Card(
-                color: Colors.white60,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                elevation: 2.0,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(7, 15, 0, 0),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/tajweedIcon.png'),
-                      const Text(
-                        'Learn Online Translation of Quran',
-                        style: TextStyle(
-                            color: Color.fromRGBO(10, 91, 144, 1),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      )
-                    ],
+                  Expanded(
+                    child: SizedBox(
+                      height: 80,
+                      width: 150,
+                      child: Card(
+                        color: const Color.fromRGBO(10, 91, 144, 1),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                        elevation: 2.0,
+                        child: const Padding(
+                          padding: EdgeInsets.fromLTRB(18, 10, 0, 0),
+                          child: Text(
+                            ' Learn\n Hifz-ul-Quran\n Online',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              Card(
-                color: Colors.white60,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                elevation: 2.0,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(7, 15, 0, 0),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/prayer.png'),
-                      const Text(
-                        'Pillars of Islam & Belief System',
-                        style: TextStyle(
-                            color: Color.fromRGBO(10, 91, 144, 1),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      )
-                    ],
+
+              Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: 80,
+                      width: 150,
+                      child: Card(
+                        color: const Color.fromRGBO(10, 91, 144, 1),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                        elevation: 2.0,
+                        child: const Padding(
+                          padding: EdgeInsets.fromLTRB(18, 10, 0, 0),
+                          child: Text(
+                            ' Learn Online\n Translation of\n Quran',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Card(
-                color: Colors.white60,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                elevation: 2.0,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(7, 15, 0, 0),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/strongbeliefIcon.png'),
-                      const Text(
-                        'Daily Islamic Supplications',
-                        style: TextStyle(
-                            color: Color.fromRGBO(10, 91, 144, 1),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      )
-                    ],
+                  Expanded(
+                    child: SizedBox(
+                      height: 80,
+                      width: 150,
+                      child: Card(
+
+                        color: const Color.fromRGBO(10, 91, 144, 1),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                        elevation: 2.0,
+                        child: const Padding(
+                          padding: EdgeInsets.fromLTRB(18, 10, 0, 0),
+                          child: Text(
+                            ' Pillars of\n Islam & Belief\n System',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
+
+
             ],
           ),
         ),
       ),
     );
   }
+  buildDrawer() {
+    final auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    return ClipPath(
+      clipper: OvalRightBorderClipper(),
+      child: Drawer(
+        child: Container(
+          padding: const EdgeInsets.only(left: 16.0, right: 40),
+          decoration: BoxDecoration(
+              color: primary,
+              boxShadow: const [BoxShadow(color: Colors.black45)]),
+          width: 300,
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(height: 80.0),
+                  _buildRow(Icons.compass_calibration, "Qibla Direction", () {
+                    Navigator.pushNamed(context, Compass.id);
+                  }),
+                  _buildDivider(),
+                  _buildRow(Icons.calendar_month, "Ramazan Calendar", () {
+                    // Navigator.pushNamed(context, Calendar.id);
+                    Fluttertoast.showToast(
+                        msg:'Coming Soon',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16);
+                  }),
+                  _buildDivider(),
+                  _buildRow(
+                    Icons.access_time_filled,
+                    "Namaz Timing",
+                        () {
+                      Navigator.pushNamed(context, NamazLoccheck.id);
+                    },
+                    showBadge: true,
+                  ),
+                  _buildDivider(),
+                  _buildRow(Icons.admin_panel_settings, "For Admin", () {
+                    Navigator.pushNamed(context, AdminPage.id);
+
+                  }, showBadge: true),
+                  _buildDivider(),
+                  // // _buildRow(Icons.settings, "Settings", () {
+                  // //   print('Tapped setting');
+                  // // }),
+                  // // _buildDivider(),
+                  // // _buildRow(Icons.email, "Contact us", () {
+                  // //   print('Tapped contct');
+                  // // }),
+                  // // _buildDivider(),
+                  // // _buildRow(Icons.info_outline, "Help", () {
+                  // //   print('Tapped help');
+                  // }),
+                  const SizedBox(
+                    height: 350,
+                  ),
+                  const Text("Powered By IT Artificer",style: TextStyle(color: Colors.white),)
+
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Divider _buildDivider() {
+    return Divider(
+      color: active,
+    );
+  }
+
+  Widget _buildRow(IconData icon, String title, onTap,
+      {bool showBadge = false}) {
+    final TextStyle tStyle = TextStyle(color: active, fontSize: 16.0);
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Row(children: [
+        Icon(
+          icon,
+          color: active,
+        ),
+        const SizedBox(width: 10.0),
+        InkWell(
+          onTap: onTap,
+          child: Text(
+            title,
+            style: tStyle,
+          ),
+        ),
+        //const Spacer(),
+      ]),
+    );
+  }
 }
+
+class OvalRightBorderClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+    path.lineTo(0, 0);
+    path.lineTo(size.width - 40, 0);
+    path.quadraticBezierTo(
+        size.width, size.height / 4, size.width, size.height / 2);
+    path.quadraticBezierTo(size.width, size.height - (size.height / 4),
+        size.width - 40, size.height);
+    path.lineTo(0, size.height);
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return true;
+  }
+}
+
+
