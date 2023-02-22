@@ -10,6 +10,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:tasleem_al_quran/slide_images.dart';
 
 import '../admin_files/admin_login_page.dart';
+import '../admin_files/user_data.dart';
 import '../bottom_navigation_bar.dart';
 import '../namaz_timing_file/namaz_loc_check.dart';
 import '../qibla_files/compass_file.dart';
@@ -422,7 +423,11 @@ class _RegisterState extends State<Register> {
                   ),
                   _buildDivider(),
                   _buildRow(Icons.admin_panel_settings, "For Admin", () {
-                    Navigator.pushNamed(context, AdminPage.id);
+                    if (auth.currentUser != null) {
+                      Navigator.pushNamed(context, UserData.id);
+                    } else {
+                      Navigator.pushNamed(context, AdminPage.id);
+                    }
 
                   }, showBadge: true),
                   _buildDivider(),

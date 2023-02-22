@@ -14,6 +14,7 @@ import 'package:tasleem_al_quran/slide_images.dart';
 
 import '../about_us_files/ayesha_jadoon.dart';
 import '../admin_files/admin_login_page.dart';
+import '../admin_files/user_data.dart';
 import '../namaz_timing_file/namaz_loc_check.dart';
 import '../qibla_files/compass_file.dart';
 import 'home.dart';
@@ -98,16 +99,16 @@ class _OurTeamState extends State<OurTeam> {
                 backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
                 child: CircleAvatar(
                   radius: 97,
-                  backgroundImage: const AssetImage('assets/sabahmalik.jpg'),
+                  backgroundImage: const AssetImage('assets/SaadArshadpic.jpg'),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, SabahMalik.id);
+                      Navigator.pushNamed(context, SaadArshad.id);
                     },
                   ),
                 ),
               ),
               const Text(
-                'Saba Malik',
+                'Saad Arshad',
                 style: TextStyle(
                     color: Color.fromRGBO(10, 91, 144, 1),
                     fontSize: 20,
@@ -198,10 +199,10 @@ class _OurTeamState extends State<OurTeam> {
                         backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
                         radius: 97,
                         backgroundImage:
-                        const AssetImage('assets/SaadArshadpic.jpg'),
+                        const AssetImage('assets/sabahmalik.jpg'),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, SaadArshad.id);
+                            Navigator.pushNamed(context, SabahMalik.id);
                           },
                         ),
                       ),
@@ -222,7 +223,7 @@ class _OurTeamState extends State<OurTeam> {
                     ),
                   ),
                   Text(
-                    'Saad Arshad',
+                    'Saba Malik',
                     style: TextStyle(
                         color: Color.fromRGBO(10, 91, 144, 1),
                         fontSize: 17,
@@ -280,7 +281,11 @@ class _OurTeamState extends State<OurTeam> {
                   ),
                   _buildDivider(),
                   _buildRow(Icons.admin_panel_settings, "For Admin", () {
-                    Navigator.pushNamed(context, AdminPage.id);
+                    if (auth.currentUser != null) {
+                      Navigator.pushNamed(context, UserData.id);
+                    } else {
+                      Navigator.pushNamed(context, AdminPage.id);
+                    }
 
                   }, showBadge: true),
                   _buildDivider(),

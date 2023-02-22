@@ -2,9 +2,11 @@ import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tasleem_al_quran/dashboard_files/Register.dart';
 import 'package:tasleem_al_quran/slide_images.dart';
 
 import '../admin_files/admin_login_page.dart';
+import '../admin_files/user_data.dart';
 import '../bottom_navigation_bar.dart';
 import '../namaz_timing_file/namaz_loc_check.dart';
 import '../qibla_files/compass_file.dart';
@@ -53,9 +55,9 @@ class _FeeState extends State<Fee> {
                 child: SlideImage(),
               ),
               const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 15, 150, 2),
+                  padding: EdgeInsets.fromLTRB(0, 15, 190, 2),
                   child: Text(
-                    'FEE STRUCTURE',
+                    'Fee Structure',
                     style: TextStyle(
                         fontSize: 25,
                         color: Color.fromRGBO(10, 91, 144, 0.8),
@@ -67,24 +69,16 @@ class _FeeState extends State<Fee> {
                   child: Text(
                     'Quranic education must be much affordable to all so that everyone can learn, recite and understand Quran easily and effectively.\n\n'
                     'There will be free trial sessions for three days. After the satisfaction of our high-quality services, and our highly qualified Quranic Teaching staff, the following fee structure will be enforced on monthly basis.\n\n'
-                    'Moreover, we provide considerable discounts on more than one student (siblings and family members) with 0% registration charges, and variation in fee is based on class time duration, a number of siblings and family members, course schedule plan, and Fee Chart for needy families.\n\n',
+                    'Moreover, we provide considerable discounts on more than one student (siblings and family members) with 0% registration charges, and variation in fee is based on class time duration, a number of siblings and family members, course schedule plan, and Fee Chart for needy families.\n',
                     textAlign: TextAlign.justify,
                     style: TextStyle(fontSize: 17),
                   )),
+
               const Padding(
-                  padding: EdgeInsets.fromLTRB(3, 0, 0, 10),
-                  child: Text(
-                    'Our Fee Structure and Schedule Plan',
-                    style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                  )),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(2, 10, 65, 0),
+                padding: EdgeInsets.fromLTRB(2, 1, 70, 0),
                 child: Text(
                   '3 Days Free Trial with Each Plan',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
                 ),
               ),
               const Padding(
@@ -100,7 +94,7 @@ class _FeeState extends State<Fee> {
                 child: Text(
                   '5 Days / Week Days Packages:',
                   style: TextStyle(
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.bold,
                       fontSize: 20,
                       ),
                 ),
@@ -113,23 +107,28 @@ class _FeeState extends State<Fee> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(1, 15, 60, 0),
+                margin: const EdgeInsets.fromLTRB(21, 15, 60, 0),
                 child: Table(
-                  defaultColumnWidth: const FixedColumnWidth(90.0),
+                  defaultColumnWidth: const FixedColumnWidth(80.0),
                   border: TableBorder.all(
                       color: Colors.black, style: BorderStyle.solid, width: 1),
                   children: [
                     TableRow(children: [
                       Column(children: const [
-                        Text('Country',
+                        Text('S.no',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                       Column(children: const [
-                        Text('  Classes/\n  Month',
+                        Text('Country',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
+                      // Column(children: const [
+                      //   Text('  Classes/\n  Month',
+                      //       style: TextStyle(
+                      //           fontSize: 15.0, fontWeight: FontWeight.bold))
+                      // ]),
                       Column(children: const [
                         Text('Fee/Month',
                             style: TextStyle(
@@ -143,12 +142,12 @@ class _FeeState extends State<Fee> {
                     ]),
                     TableRow(children: [
                       Column(children: const [
-                        Text('USA',
+                        Text('1',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                       Column(children: const [
-                        Text('  20 Classes/\n  Month',
+                        Text('USA',
                             style: TextStyle(fontSize: 15.0))
                       ]),
                       Column(children: const [
@@ -160,12 +159,12 @@ class _FeeState extends State<Fee> {
                     ]),
                     TableRow(children: [
                       Column(children: const [
-                        Text('UK',
+                        Text('2',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                       Column(children: const [
-                        Text('  20 Classes/\n  Month',
+                        Text('UK',
                             style: TextStyle(fontSize: 15.0))
                       ]),
                       Column(children: const [
@@ -177,12 +176,12 @@ class _FeeState extends State<Fee> {
                     ]),
                     TableRow(children: [
                       Column(children: const [
-                        Text('Europe',
+                        Text('3',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                       Column(children: const [
-                        Text('  20 Classes/\n  Month',
+                        Text('Europe',
                             style: TextStyle(fontSize: 15.0))
                       ]),
                       Column(children: const [
@@ -194,12 +193,12 @@ class _FeeState extends State<Fee> {
                     ]),
                     TableRow(children: [
                       Column(children: const [
-                        Text('Australia',
+                        Text('4',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                       Column(children: const [
-                        Text('  20 Classes/\n  Month',
+                        Text('Australia',
                             style: TextStyle(fontSize: 15.0))
                       ]),
                       Column(children: const [
@@ -211,12 +210,12 @@ class _FeeState extends State<Fee> {
                     ]),
                     TableRow(children: [
                       Column(children: const [
-                        Text('UAE',
+                        Text('5',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                       Column(children: const [
-                        Text('  20 Classes/\n  Month',
+                        Text('UAE',
                             style: TextStyle(fontSize: 15.0))
                       ]),
                       Column(children: const [
@@ -231,108 +230,119 @@ class _FeeState extends State<Fee> {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(5, 15, 110, 0),
-                child: Text(
-                  'Get Register for a Free Trial',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+               Padding(
+                padding: EdgeInsets.fromLTRB(5, 15, 110, 10),
+                child: InkWell(
+                  onTap: (){
+                       Navigator.pushNamed(context, Register.id);
+                  },
+                  child: Text(
+                    'Get Register for a Free Trial',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+                  ),
                 ),
               ),
+              // const Padding(
+              //   padding: EdgeInsets.fromLTRB(8, 15, 110, 0),
+              //   child: Text(
+              //     '2 Days & 3 Days/Weekend Packages:',
+              //     style: TextStyle(
+              //         fontWeight: FontWeight.bold,
+              //         fontSize: 19,
+              //         ),
+              //   ),
+              // ),
+              // const Padding(
+              //   padding: EdgeInsets.fromLTRB(2, 15, 60, 0),
+              //   child: Text(
+              //     '08 Days & 12 Days /Monthly Plan;',
+              //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+              //   ),
+              // ),
+              // const Padding(
+              //   padding: EdgeInsets.fromLTRB(8, 15, 120, 0),
+              //   child: Text(
+              //     'Class Type: 1 on 1 Live class.\nClass Duration: 45 Minutes/Day.',
+              //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              //   ),
+              // ),
+              // Container(
+              //   margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+              //   child: Table(
+              //     defaultColumnWidth: const FixedColumnWidth(110.0),
+              //     border: TableBorder.all(
+              //         color: Colors.black, style: BorderStyle.solid, width: 1),
+              //     children: [
+              //       TableRow(children: [
+              //         Column(children: const [
+              //           Text('Country',
+              //               style: TextStyle(
+              //                   fontSize: 17.0, fontWeight: FontWeight.bold))
+              //         ]),
+              //         Column(children: const [
+              //           Text('Currency',
+              //               style: TextStyle(
+              //                   fontSize: 17.0, fontWeight: FontWeight.bold))
+              //         ]),
+              //         Column(children: const [
+              //           Text('Fee/Month',
+              //               style: TextStyle(
+              //                   fontSize: 17.0, fontWeight: FontWeight.bold))
+              //         ]),
+              //       ]),
+              //       TableRow(children: [
+              //         Column(children: const [
+              //           Text(
+              //             'USA',
+              //             style: TextStyle(fontWeight: FontWeight.bold),
+              //           )
+              //         ]),
+              //         Column(children: const [Text('USD')]),
+              //         Column(children: const [Text('   40/-')]),
+              //       ]),
+              //       TableRow(children: [
+              //         Column(children: const [
+              //           Text('UK',
+              //               style: TextStyle(fontWeight: FontWeight.bold))
+              //         ]),
+              //         Column(children: const [Text('GBP')]),
+              //         Column(children: const [Text('30')]),
+              //       ]),
+              //       TableRow(children: [
+              //         Column(children: const [
+              //           Text('Europe',
+              //               style: TextStyle(fontWeight: FontWeight.bold))
+              //         ]),
+              //         Column(children: const [Text('EUR')]),
+              //         Column(children: const [Text('30')]),
+              //       ]),
+              //       TableRow(children: [
+              //         Column(children: const [
+              //           Text('Australia',
+              //               style: TextStyle(fontWeight: FontWeight.bold))
+              //         ]),
+              //         Column(children: const [Text('	AUD')]),
+              //         Column(children: const [Text('40')]),
+              //       ]),
+              //       TableRow(children: [
+              //         Column(children: const [
+              //           Text('UAE',
+              //               style: TextStyle(fontWeight: FontWeight.bold))
+              //         ]),
+              //         Column(children: const [Text('Riyal/Dirham')]),
+              //         Column(children: const [Text('85')]),
+              //       ]),
+              //     ],
+              //   ),
+              // ),
               const Padding(
-                padding: EdgeInsets.fromLTRB(8, 15, 110, 0),
-                child: Text(
-                  '2 Days & 3 Days/Weekend Packages:',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 19,
-                      ),
-                ),
+                padding: EdgeInsets.fromLTRB(10, 5, 305, 0),
+                child: Text('Note',style: TextStyle(
+                  color: Color.fromRGBO(10, 91, 144, 0.8),fontSize: 20,fontWeight: FontWeight.bold
+                ),),
               ),
               const Padding(
-                padding: EdgeInsets.fromLTRB(2, 15, 60, 0),
-                child: Text(
-                  '08 Days & 12 Days /Monthly Plan;',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(8, 15, 120, 0),
-                child: Text(
-                  'Class Type: 1 on 1 Live class.\nClass Duration: 45 Minutes/Day.',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                child: Table(
-                  defaultColumnWidth: const FixedColumnWidth(110.0),
-                  border: TableBorder.all(
-                      color: Colors.black, style: BorderStyle.solid, width: 1),
-                  children: [
-                    TableRow(children: [
-                      Column(children: const [
-                        Text('Country',
-                            style: TextStyle(
-                                fontSize: 17.0, fontWeight: FontWeight.bold))
-                      ]),
-                      Column(children: const [
-                        Text('Currency',
-                            style: TextStyle(
-                                fontSize: 17.0, fontWeight: FontWeight.bold))
-                      ]),
-                      Column(children: const [
-                        Text('Fee/Month',
-                            style: TextStyle(
-                                fontSize: 17.0, fontWeight: FontWeight.bold))
-                      ]),
-                    ]),
-                    TableRow(children: [
-                      Column(children: const [
-                        Text(
-                          'USA',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        )
-                      ]),
-                      Column(children: const [Text('USD')]),
-                      Column(children: const [Text('   40/-')]),
-                    ]),
-                    TableRow(children: [
-                      Column(children: const [
-                        Text('UK',
-                            style: TextStyle(fontWeight: FontWeight.bold))
-                      ]),
-                      Column(children: const [Text('GBP')]),
-                      Column(children: const [Text('30')]),
-                    ]),
-                    TableRow(children: [
-                      Column(children: const [
-                        Text('Europe',
-                            style: TextStyle(fontWeight: FontWeight.bold))
-                      ]),
-                      Column(children: const [Text('EUR')]),
-                      Column(children: const [Text('30')]),
-                    ]),
-                    TableRow(children: [
-                      Column(children: const [
-                        Text('Australia',
-                            style: TextStyle(fontWeight: FontWeight.bold))
-                      ]),
-                      Column(children: const [Text('	AUD')]),
-                      Column(children: const [Text('40')]),
-                    ]),
-                    TableRow(children: [
-                      Column(children: const [
-                        Text('UAE',
-                            style: TextStyle(fontWeight: FontWeight.bold))
-                      ]),
-                      Column(children: const [Text('Riyal/Dirham')]),
-                      Column(children: const [Text('85')]),
-                    ]),
-                  ],
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(6, 15, 10, 0),
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: Text(
                   'Moreover, we are also providing a 10% discount on fees to poor and needy families. We charge fees in advance after trial classes. Eid Holidays are also included in this plan. Moreover, there is no refund of the fee.',
                   style: TextStyle(fontSize: 16),
@@ -387,7 +397,11 @@ class _FeeState extends State<Fee> {
                   ),
                   _buildDivider(),
                   _buildRow(Icons.admin_panel_settings, "For Admin", () {
-                    Navigator.pushNamed(context, AdminPage.id);
+                    if (auth.currentUser != null) {
+                      Navigator.pushNamed(context, UserData.id);
+                    } else {
+                      Navigator.pushNamed(context, AdminPage.id);
+                    }
 
                   }, showBadge: true),
                   _buildDivider(),
@@ -402,10 +416,10 @@ class _FeeState extends State<Fee> {
                   // // _buildRow(Icons.info_outline, "Help", () {
                   // //   print('Tapped help');
                   // }),
-                  SizedBox(
+                  const SizedBox(
                     height: 350,
                   ),
-                  Text("Powered By IT Artificer",style: TextStyle(color: Colors.white),)
+                  const Text("Powered By IT Artificer",style: TextStyle(color: Colors.white),)
 
                 ],
               ),
