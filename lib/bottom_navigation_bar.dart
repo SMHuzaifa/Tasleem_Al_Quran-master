@@ -1,18 +1,18 @@
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_launch/flutter_launch.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tasleem_al_quran/dashboard_files/courses.dart';
 import 'package:tasleem_al_quran/dashboard_files/fee_chart.dart';
 
 import 'package:tasleem_al_quran/dashboard_files/home.dart';
 import 'package:tasleem_al_quran/dashboard_files/about_us.dart';
+import 'package:tasleem_al_quran/quran_button.dart';
+import 'package:tasleem_al_quran/quran_files/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'admin_files/user_data.dart';
 import 'dashboard_files/Register.dart';
 
 class MyNavigationBar extends StatefulWidget {
@@ -32,7 +32,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   final List<Widget> _children = [
     //MyMenue(),
     const Home(),
-    const OurTeam(),
+    const QuranButton(),
     const Courses(),
     const Fee(),
     const Register()
@@ -64,7 +64,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             label: "Home",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline_rounded), label: "About Us"),
+              icon: Icon(Icons.book_outlined), label: "Quran"),
           BottomNavigationBarItem(
               icon: Icon(Icons.play_lesson), label: "Courses"),
           BottomNavigationBarItem(
@@ -77,14 +77,12 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   }
 }
 
-
 openWhatsapp() async {
   final Uri phoneNumber = Uri.parse("+923075015849");
   final Uri _urlandroid =
       Uri.parse("whatsapp://send?phone=$phoneNumber&text=hello");
   final Uri _urlios =
       Uri.parse("https://wa.me/$phoneNumber?text=${(Uri.parse("hello"))}");
-
 
   if (Platform.isIOS) {
     if (await canLaunchUrl(_urlios)) {

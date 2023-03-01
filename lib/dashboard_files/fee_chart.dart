@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tasleem_al_quran/dashboard_files/Register.dart';
+import 'package:tasleem_al_quran/quran_files/main.dart';
 import 'package:tasleem_al_quran/slide_images.dart';
 
 import '../admin_files/admin_login_page.dart';
@@ -10,6 +11,8 @@ import '../admin_files/user_data.dart';
 import '../bottom_navigation_bar.dart';
 import '../namaz_timing_file/namaz_loc_check.dart';
 import '../qibla_files/compass_file.dart';
+import 'package:hijri/hijri_calendar.dart';
+import 'package:intl/intl.dart';
 
 class Fee extends StatefulWidget {
   const Fee({Key? key}) : super(key: key);
@@ -26,6 +29,15 @@ class _FeeState extends State<Fee> {
 
   @override
   Widget build(BuildContext context) {
+    var _size = MediaQuery.of(context).size;
+    HijriCalendar.setLocal('ar');
+    var _hijri = HijriCalendar.now();
+    var day = DateTime.now();
+    var format = DateFormat('EEE , d MMM yyyy');
+    var formatted = format.format(day);
+
+
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -49,10 +61,65 @@ class _FeeState extends State<Fee> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(
-                height: 180,
-                width: 360,
-                child: SlideImage(),
+              Container(
+                height: _size.height * 0.22, // 22% of screen
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('assets/background_img.jpg'))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(60, 40, 40, 6),
+                      child: Text(
+                        formatted,
+                        style: const TextStyle(color: Colors.white, fontSize: 30),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(80, 0, 40, 25),
+                      child: RichText(
+                        text: TextSpan(children: <InlineSpan>[
+                          WidgetSpan(
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Text(
+                                _hijri.hDay.toString(),
+                                style: const TextStyle(
+                                    fontSize: 27, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          WidgetSpan(
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Text(
+                                _hijri.longMonthName,
+                                style: const TextStyle(
+                                    fontSize: 23,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          WidgetSpan(
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Text(
+                                '${_hijri.hYear} AH',
+                                style: const TextStyle(
+                                    fontSize: 27, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const Padding(
                   padding: EdgeInsets.fromLTRB(0, 15, 190, 2),
@@ -77,7 +144,7 @@ class _FeeState extends State<Fee> {
               const Padding(
                 padding: EdgeInsets.fromLTRB(2, 1, 70, 0),
                 child: Text(
-                  '3 Days Free Trial with Each Plan',
+                  '3 Days Free Trail with Each Plan',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
                 ),
               ),
@@ -230,17 +297,19 @@ class _FeeState extends State<Fee> {
                   ],
                 ),
               ),
-               Padding(
-                padding: EdgeInsets.fromLTRB(5, 15, 110, 10),
-                child: InkWell(
-                  onTap: (){
-                       Navigator.pushNamed(context, Register.id);
-                  },
-                  child: Text(
-                    'Get Register for a Free Trial',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
-                  ),
-                ),
+                Padding(
+                padding: const EdgeInsets.fromLTRB(0, 15, 170, 10),
+                child:  TextButton(
+                  style: TextButton.styleFrom(
+                     // foregroundColor: Color.fromRGBO(10, 91, 144, 1),
+                      backgroundColor: Color.fromRGBO(10, 91, 144, 1),
+                      textStyle:
+                      const TextStyle(fontSize: 24, fontStyle: FontStyle.italic)),
+                  onPressed: () {
+                  Navigator.pushNamed(context, Register.id);
+                }, child: const Text("Click For Free Trail",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 19),),
+
+                )
               ),
               // const Padding(
               //   padding: EdgeInsets.fromLTRB(8, 15, 110, 0),
@@ -336,7 +405,7 @@ class _FeeState extends State<Fee> {
               //   ),
               // ),
               const Padding(
-                padding: EdgeInsets.fromLTRB(10, 5, 305, 0),
+                padding: EdgeInsets.fromLTRB(5, 5, 305, 0),
                 child: Text('Note',style: TextStyle(
                   color: Color.fromRGBO(10, 91, 144, 0.8),fontSize: 20,fontWeight: FontWeight.bold
                 ),),
@@ -405,9 +474,9 @@ class _FeeState extends State<Fee> {
 
                   }, showBadge: true),
                   _buildDivider(),
-                  // // _buildRow(Icons.settings, "Settings", () {
-                  // //   print('Tapped setting');
-                  // // }),
+                  // _buildRow(Icons.book, "Quran", () {
+                  //   Navigator.pushNamed(context, Quran.id);
+                  // }),
                   // // _buildDivider(),
                   // // _buildRow(Icons.email, "Contact us", () {
                   // //   print('Tapped contct');

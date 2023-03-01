@@ -7,6 +7,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tasleem_al_quran/admin_files/user_data.dart';
 import 'package:tasleem_al_quran/namaz_timing_file/namaz_loc_check.dart';
 import 'package:tasleem_al_quran/slide_images.dart';
+import 'package:hijri/hijri_calendar.dart';
+import 'package:intl/intl.dart';
 
 import '../admin_files/admin_login_page.dart';
 
@@ -14,6 +16,7 @@ import '../bottom_navigation_bar.dart';
 import '../calendar.dart';
 
 import '../qibla_files/compass_file.dart';
+import '../quran_files/main.dart';
 
 class Home extends StatefulWidget {
   static String id = "Home";
@@ -29,6 +32,18 @@ class _HomeState extends State<Home> {
   final Color active = Colors.white;
   @override
   Widget build(BuildContext context) {
+    var _size = MediaQuery.of(context).size;
+    HijriCalendar.setLocal('ar');
+    var _hijri = HijriCalendar.now();
+    var day = DateTime.now();
+    var format = DateFormat('EEE , d MMM yyyy');
+    var formatted = format.format(day);
+
+
+
+
+
+
     return WillPopScope(
       onWillPop: () async {
         // Display a confirmation dialog
@@ -91,14 +106,92 @@ class _HomeState extends State<Home> {
           },
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
+         child:
+         SingleChildScrollView(
             child: Column(
-              children:  <Widget>[
-                const SizedBox(
-                  height: 180,
-                  width: 1000,
-                  child: SlideImage(),
+              children: <Widget>[
+                Container(
+                  height: _size.height * 0.22, // 22% of screen
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/background_img.jpg'))),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(60, 40, 40, 6),
+                        child: Text(
+                          formatted,
+                          style: const TextStyle(color: Colors.white, fontSize: 30),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(80, 0, 40, 25),
+                        child: RichText(
+                          text: TextSpan(children: <InlineSpan>[
+                            WidgetSpan(
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  _hijri.hDay.toString(),
+                                  style: const TextStyle(
+                                      fontSize: 27, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            WidgetSpan(
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  _hijri.longMonthName,
+                                  style: const TextStyle(
+                                      fontSize: 23,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            WidgetSpan(
+                              child: Padding(
+                                padding: const EdgeInsets.all(4),
+                                child: Text(
+                                  '${_hijri.hYear} AH',
+                                  style: const TextStyle(
+                                      fontSize: 27, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ]),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // const SizedBox(
+                //   height: 180,
+                //   width: 1000,
+                //   child: SlideImage(),
+                // ),
                 const Padding(
                   padding: EdgeInsets.fromLTRB(1, 8, 1, 5),
                   child: Text(
@@ -138,7 +231,7 @@ class _HomeState extends State<Home> {
                   thickness: 2,
                   endIndent: 20,
                   indent: 20,
-                  color:Color.fromRGBO(10, 91, 144, 1) ,
+                  color: Color.fromRGBO(10, 91, 144, 1),
                 ),
                 const Padding(
                   padding: EdgeInsets.fromLTRB(50, 5, 50, 15),
@@ -165,7 +258,8 @@ class _HomeState extends State<Home> {
                     ),
                     subtitle: Text(
                       'As Quran is the prime source of guidance for all the humanity, especially Muslims, therefore, it is the duty of parents to ensure that the kids get proper Quran education',
-                      textAlign: TextAlign.justify,style: TextStyle(color: Colors.white),
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
@@ -173,26 +267,24 @@ class _HomeState extends State<Home> {
                   height: 8,
                 ),
                 Container(
-                  width: 350,
-                  height: 100,
-                  color: const Color.fromRGBO(10, 91, 144, 1),
-                  child: const ListTile(
-                    title: Text(
-                      'Strong Belief',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white),
-                    ),
-                    subtitle: Text(
-                      'The six Kalimah in Islam is six significant parts of ones religious belief, mostly taken from hadiths (in some traditions, six phrases, then known as the six kalimas.',
-                      textAlign: TextAlign.justify,
-                        style: TextStyle(color: Colors.white
-                    ),
-                  ),
-                )),
+                    width: 350,
+                    height: 100,
+                    color: const Color.fromRGBO(10, 91, 144, 1),
+                    child: const ListTile(
+                      title: Text(
+                        'Strong Belief',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white),
+                      ),
+                      subtitle: Text(
+                        'The six Kalimah in Islam is six significant parts of ones religious belief, mostly taken from hadiths (in some traditions, six phrases, then known as the six kalimas.',
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    )),
                 const SizedBox(
                   height: 8,
                 ),
@@ -282,103 +374,19 @@ class _HomeState extends State<Home> {
                       'A series of books for beginners to learn Quranic Arabic. It is used to teach children how to Learn and read the Quran.',
                       textAlign: TextAlign.justify,
                       style: TextStyle(color: Colors.white),
-
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                // const Padding(
-                //   padding: EdgeInsets.fromLTRB(50, 5, 50, 15),
-                //   child: Text('Key Pillars of Islam',
-                //       textAlign: TextAlign.center,
-                //       style: TextStyle(
-                //         fontWeight: FontWeight.bold,
-                //         fontSize: 30,
-                //         color: Color.fromRGBO(10, 91, 144, 1),
-                //       )),
-                // ),
-                // const ListTile(
-                //   title: Text(
-                //     'Kalma Shahadat',
-                //     textAlign: TextAlign.start,
-                //     style: TextStyle(
-                //         fontWeight: FontWeight.bold,
-                //         fontSize: 25,
-                //         color: Color.fromRGBO(10, 91, 144, 1)),
-                //   ),
-                //   subtitle: Text(
-                //     'A series of books for beginners to learn Quranic Arabic. It is used to teach children how to Learn and read the Quran.',
-                //     textAlign: TextAlign.justify,
-                //   ),
-                // ),
-                // const ListTile(
-                //   title: Text(
-                //     'Salah',
-                //     textAlign: TextAlign.start,
-                //     style: TextStyle(
-                //         fontWeight: FontWeight.bold,
-                //         fontSize: 25,
-                //         color: Color.fromRGBO(10, 91, 144, 1)),
-                //   ),
-                //   subtitle: Text(
-                //     '“O you who have believed, seek help through patience and prayer. Indeed, Allah is with the patient.” (Q 2:153)',
-                //     textAlign: TextAlign.justify,
-                //   ),
-                // ),
-                // const ListTile(
-                //   title: Text(
-                //     'Fasting',
-                //     textAlign: TextAlign.start,
-                //     style: TextStyle(
-                //         fontWeight: FontWeight.bold,
-                //         fontSize: 25,
-                //         color: Color.fromRGBO(10, 91, 144, 1)),
-                //   ),
-                //   subtitle: Text(
-                //     '"Fasting is prescribed for you as it was prescribed for those before you, that you may attain taqwaa." (Q 2:183)',
-                //     textAlign: TextAlign.justify,
-                //   ),
-                // ),
-                // const ListTile(
-                //   title: Text(
-                //     'Zakah',
-                //     textAlign: TextAlign.start,
-                //     style: TextStyle(
-                //         fontWeight: FontWeight.bold,
-                //         fontSize: 25,
-                //         color: Color.fromRGBO(10, 91, 144, 1)),
-                //   ),
-                //   subtitle: Text(
-                //     '“And keep the prayer established, and pay the zakah, and bow your heads with those who bow down.” (Q 2:43)',
-                //     textAlign: TextAlign.justify,
-                //   ),
-                // ),
-                // const ListTile(
-                //   title: Text(
-                //     'Hajj',
-                //     textAlign: TextAlign.start,
-                //     style: TextStyle(
-                //         fontWeight: FontWeight.bold,
-                //         fontSize: 25,
-                //         color: Color.fromRGBO(10, 91, 144, 1)),
-                //   ),
-                //   subtitle: Text(
-                //     '"Then let them end their untidiness and fulfill their vows and perform Tawaf around the ancient House." (Q 22:29)',
-                //     textAlign: TextAlign.justify,
-                //   ),
-                // ),
-              ],
-            ),
-          ),
+          ]),
         ),
       ),
-    );
+      ));
   }
 
   _buildDrawer() {
-
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
     return ClipPath(
@@ -410,7 +418,6 @@ class _HomeState extends State<Home> {
                   //   child:  Image(image: AssetImage('assets/tasleemalquranlogo.png'),)
                   //   ),
 
-
                   const SizedBox(height: 80.0),
                   _buildRow(Icons.compass_calibration, "Qibla Direction", () {
                     Navigator.pushNamed(context, Compass.id);
@@ -439,16 +446,15 @@ class _HomeState extends State<Home> {
                   _buildDivider(),
                   _buildRow(Icons.admin_panel_settings, "For Admin", () {
                     if (auth.currentUser != null) {
-                       Navigator.pushNamed(context, UserData.id);
+                      Navigator.pushNamed(context, UserData.id);
                     } else {
                       Navigator.pushNamed(context, AdminPage.id);
                     }
-
                   }, showBadge: true),
                   _buildDivider(),
-                  // // _buildRow(Icons.settings, "Settings", () {
-                  // //   print('Tapped setting');
-                  // // }),
+                  // _buildRow(Icons.book, "Quran", () {
+                  //   Navigator.pushNamed(context, Quran.id);
+                  // }),
                   // // _buildDivider(),
                   // // _buildRow(Icons.email, "Contact us", () {
                   // //   print('Tapped contct');
@@ -501,6 +507,7 @@ class _HomeState extends State<Home> {
       ]),
     );
   }
+
   void _showDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -525,7 +532,8 @@ class _HomeState extends State<Home> {
         );
       },
     );
-  }}
+  }
+}
 
 class OvalRightBorderClipper extends CustomClipper<Path> {
   @override

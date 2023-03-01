@@ -47,7 +47,7 @@ class _Compass extends State<Compass> {
                     const Image(height:100,width:100,color:Colors.red,image: AssetImage('assets/qibla_icon.png')),
                     const SizedBox(height: 32),
                     const Text(
-                      "Your device does not have Magnetometer sensor for qibla diection",
+                      "Your device does not have Magnetometer\n sensor for qibla diection",
                       style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 32),

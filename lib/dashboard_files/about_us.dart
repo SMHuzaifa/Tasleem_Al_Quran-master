@@ -10,6 +10,7 @@ import 'package:tasleem_al_quran/about_us_files/iqra_asad.dart';
 
 import 'package:tasleem_al_quran/about_us_files/saad_arshad.dart';
 import 'package:tasleem_al_quran/about_us_files/sabah_malik.dart';
+import 'package:tasleem_al_quran/quran_files/main.dart';
 import 'package:tasleem_al_quran/slide_images.dart';
 
 import '../about_us_files/ayesha_jadoon.dart';
@@ -53,186 +54,199 @@ class _OurTeamState extends State<OurTeam> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Tasleem Al-Quran Academy',
-          style: TextStyle(color: Colors.white),
+    return WillPopScope(
+      onWillPop: ()async {
+
+      if (Navigator.of(context).canPop()) {
+
+        Navigator.of(context).pop();
+        return false;
+      } else {
+        return true;
+      }
+    },
+
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'Tasleem Al-Quran Academy',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
+          //automaticallyImplyLeading: false,
         ),
-        backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
-        //automaticallyImplyLeading: false,
-      ),
-      drawer: buildDrawer(),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
-        tooltip: 'Contact Us',
-        child: Image.asset('assets/WhatsApp.png'),
-        onPressed: () {
-          openWhatsapp();
-        },
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 180,
-                width: 360,
-                child: SlideImage(),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Center(
-                  child: Text(
-                    'Our Team',
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Color.fromRGBO(10, 91, 144, 1),
-                        fontWeight: FontWeight.bold),
-                  ),
+        drawer: buildDrawer(),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.green,
+          tooltip: 'Contact Us',
+          child: Image.asset('assets/WhatsApp.png'),
+          onPressed: () {
+            openWhatsapp();
+          },
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 180,
+                  width: 360,
+                  child: SlideImage(),
                 ),
-              ),
-
-              CircleAvatar(
-                radius: 100,
-                backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
-                child: CircleAvatar(
-                  radius: 97,
-                  backgroundImage: const AssetImage('assets/SaadArshadpic.jpg'),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, SaadArshad.id);
-                    },
-                  ),
-                ),
-              ),
-              const Text(
-                'Saad Arshad',
-                style: TextStyle(
-                    color: Color.fromRGBO(10, 91, 144, 1),
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-              //Text('"Team Manager"')
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 30, 65, 0),
-                    child: CircleAvatar(
-                      radius: 60,
-                      child: CircleAvatar(
-                        backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
-                        radius: 97,
-                        backgroundImage: const AssetImage('assets/iqrasaad.png'),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, IqraAsad.id);
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                    child: CircleAvatar(
-                      radius: 60,
-                      child: CircleAvatar(
-                        backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
-                        radius: 97,
-                        backgroundImage:
-                        const AssetImage('assets/ayeshajadoon.jpg'),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, AyeshaJadoon.id);
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(50, 2, 97, 0),
+                const Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: Center(
                     child: Text(
-                      'Iqra Asad',
+                      'Our Team',
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Color.fromRGBO(10, 91, 144, 1),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+
+                CircleAvatar(
+                  radius: 100,
+                  backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
+                  child: CircleAvatar(
+                    radius: 97,
+                    backgroundImage: const AssetImage('assets/SaadArshadpic.jpg'),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, SaadArshad.id);
+                      },
+                    ),
+                  ),
+                ),
+                const Text(
+                  'Saad Arshad',
+                  style: TextStyle(
+                      color: Color.fromRGBO(10, 91, 144, 1),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+                //Text('"Team Manager"')
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 30, 65, 0),
+                      child: CircleAvatar(
+                        radius: 60,
+                        child: CircleAvatar(
+                          backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
+                          radius: 97,
+                          backgroundImage: const AssetImage('assets/iqrasaad.png'),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, IqraAsad.id);
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                      child: CircleAvatar(
+                        radius: 60,
+                        child: CircleAvatar(
+                          backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
+                          radius: 97,
+                          backgroundImage:
+                          const AssetImage('assets/ayeshajadoon.jpg'),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, AyeshaJadoon.id);
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(50, 2, 97, 0),
+                      child: Text(
+                        'Iqra Asad',
+                        style: TextStyle(
+                            color: Color.fromRGBO(10, 91, 144, 1),
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Text(
+                      'Ayesha Jadoon',
                       style: TextStyle(
                           color: Color.fromRGBO(10, 91, 144, 1),
                           fontSize: 17,
                           fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  Text(
-                    'Ayesha Jadoon',
-                    style: TextStyle(
-                        color: Color.fromRGBO(10, 91, 144, 1),
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 30, 65, 0),
-                    child: CircleAvatar(
-                      radius: 60,
+                  ],
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 30, 65, 0),
                       child: CircleAvatar(
-                        backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
-                        radius: 97,
-                        backgroundImage: const AssetImage('assets/Noreebaeffendi.jpeg'),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, NoreebaEffendi.id);
-                          },
+                        radius: 60,
+                        child: CircleAvatar(
+                          backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
+                          radius: 97,
+                          backgroundImage: const AssetImage('assets/Noreebaeffendi.jpeg'),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, NoreebaEffendi.id);
+                            },
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                    child: CircleAvatar(
-                      radius: 60,
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                       child: CircleAvatar(
-                        backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
-                        radius: 97,
-                        backgroundImage:
-                        const AssetImage('assets/sabahmalik.jpg'),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, SabahMalik.id);
-                          },
+                        radius: 60,
+                        child: CircleAvatar(
+                          backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
+                          radius: 97,
+                          backgroundImage:
+                          const AssetImage('assets/sabahmalik.jpg'),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, SabahMalik.id);
+                            },
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(30, 2, 75, 0),
-                    child: Text(
-                      'Noreeba Effendi',
+                  ],
+                ),
+                Row(
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(30, 2, 75, 0),
+                      child: Text(
+                        'Noreeba Effendi',
+                        style: TextStyle(
+                            color: Color.fromRGBO(10, 91, 144, 1),
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Text(
+                      'Saba Malik',
                       style: TextStyle(
                           color: Color.fromRGBO(10, 91, 144, 1),
                           fontSize: 17,
                           fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  Text(
-                    'Saba Malik',
-                    style: TextStyle(
-                        color: Color.fromRGBO(10, 91, 144, 1),
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+                  ],
+                ),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -289,9 +303,9 @@ class _OurTeamState extends State<OurTeam> {
 
                   }, showBadge: true),
                   _buildDivider(),
-                  // // _buildRow(Icons.settings, "Settings", () {
-                  // //   print('Tapped setting');
-                  // // }),
+                  _buildRow(Icons.book, "Quran", () {
+                    Navigator.pushNamed(context, Quran.id);
+                  }),
                   // // _buildDivider(),
                   // // _buildRow(Icons.email, "Contact us", () {
                   // //   print('Tapped contct');

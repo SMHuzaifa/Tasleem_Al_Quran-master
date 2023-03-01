@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tasleem_al_quran/dashboard_files/about_us.dart';
+import 'package:tasleem_al_quran/quran_files/main.dart';
 import 'package:tasleem_al_quran/slide_images.dart';
 
 import '../admin_files/admin_login_page.dart';
@@ -10,6 +11,9 @@ import '../admin_files/user_data.dart';
 import '../bottom_navigation_bar.dart';
 import '../namaz_timing_file/namaz_loc_check.dart';
 import '../qibla_files/compass_file.dart';
+import 'Register.dart';
+import 'package:hijri/hijri_calendar.dart';
+import 'package:intl/intl.dart';
 
 class Courses extends StatefulWidget {
   static String id = "Courses_id";
@@ -27,6 +31,19 @@ class _CoursesState extends State<Courses> {
 
   @override
   Widget build(BuildContext context) {
+    var _size = MediaQuery.of(context).size;
+    HijriCalendar.setLocal('ar');
+    var _hijri = HijriCalendar.now();
+    var day = DateTime.now();
+    var format = DateFormat('EEE , d MMM yyyy');
+    var formatted = format.format(day);
+
+
+
+
+
+
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -50,11 +67,67 @@ class _CoursesState extends State<Courses> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(
-                height: 180,
-                width: 360,
-                child: SlideImage(),
+              Container(
+                height: _size.height * 0.22, // 22% of screen
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('assets/background_img.jpg'))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(60, 40, 40, 6),
+                      child: Text(
+                        formatted,
+                        style: const TextStyle(color: Colors.white, fontSize: 30),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(80, 0, 40, 25),
+                      child: RichText(
+                        text: TextSpan(children: <InlineSpan>[
+                          WidgetSpan(
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Text(
+                                _hijri.hDay.toString(),
+                                style: const TextStyle(
+                                    fontSize: 27, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          WidgetSpan(
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Text(
+                                _hijri.longMonthName,
+                                style: const TextStyle(
+                                    fontSize: 23,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          WidgetSpan(
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Text(
+                                '${_hijri.hYear} AH',
+                                style: const TextStyle(
+                                    fontSize: 27, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ),
+                  ],
+                ),
               ),
+
               const Padding(
                   padding: EdgeInsets.fromLTRB(0, 15, 20, 10),
                   child: Text(
@@ -81,17 +154,22 @@ class _CoursesState extends State<Courses> {
                     style: TextStyle(fontSize: 17,height: 1,),
                   )),
 
-              const Padding(
-                padding: EdgeInsets.fromLTRB(1, 0, 180, 0),
-                child: Text(
-                  'GET a FREE TRAIL',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
+               Padding(
+                padding: const EdgeInsets.fromLTRB(1, 0, 180, 0),
+                child: TextButton(
+                    style: TextButton.styleFrom(
+                      // foregroundColor: Color.fromRGBO(10, 91, 144, 1),
+                        backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
+                        textStyle:
+                        const TextStyle(fontSize: 24, fontStyle: FontStyle.italic)),
 
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.green),
-                ),
+                    onPressed: (){
+                  Navigator.pushNamed(context, Register.id);
+                }, child: const Text("Click for Free Trail",style: TextStyle(
+
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.white),))
               ),
               Row(
                 children: [
@@ -295,9 +373,9 @@ class _CoursesState extends State<Courses> {
 
                   }, showBadge: true),
                   _buildDivider(),
-                  // // _buildRow(Icons.settings, "Settings", () {
-                  // //   print('Tapped setting');
-                  // // }),
+                  // _buildRow(Icons.book, "Quran", () {
+                  //   Navigator.pushNamed(context, Quran.id);
+                  // }),
                   // // _buildDivider(),
                   // // _buildRow(Icons.email, "Contact us", () {
                   // //   print('Tapped contct');

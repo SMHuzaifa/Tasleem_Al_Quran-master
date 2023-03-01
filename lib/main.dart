@@ -20,6 +20,11 @@ import 'package:tasleem_al_quran/namaz_timing_file/UI_file.dart';
 import 'package:tasleem_al_quran/namaz_timing_file/namaz_loc.dart';
 import 'package:tasleem_al_quran/namaz_timing_file/namaz_loc_check.dart';
 import 'package:tasleem_al_quran/qibla_files/compass_file.dart';
+import 'package:tasleem_al_quran/quran_files/main.dart';
+import 'package:tasleem_al_quran/quran_files/screens/jus_screen.dart';
+import 'package:tasleem_al_quran/quran_files/screens/qari_screen.dart';
+import 'package:tasleem_al_quran/quran_files/screens/quran_screen.dart';
+import 'package:tasleem_al_quran/quran_files/screens/surah_detail.dart';
 
 
 import 'admin_files/admin_login_page.dart';
@@ -80,9 +85,13 @@ class MyApp extends StatelessWidget {
         UserData.id: (context) => const UserData(),
         AdminPage.id: (context) => const AdminPage(),
         NamazLoc.id: (context) => NamazLoc(),
-        NamazLoccheck.id: (context) => NamazLoccheck(),
-        //Location.id: (context) => Location(),
+        NamazLoccheck.id: (context) => const NamazLoccheck(),
+        Quran.id: (context) => const Quran(),
       //  QiblahScreen.id: (context) => QiblahScreen(),
+        QariListScreen.id:(context) => const QariListScreen(),
+        QuranScreen.id:(context) => const QuranScreen(),
+        JuzScreen.id: (context) => const JuzScreen(),
+        Surahdetail.id: (context) => const Surahdetail(),
 
 
       },

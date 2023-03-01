@@ -6,9 +6,6 @@ import 'package:intl/intl.dart';
 
 import 'package:tasleem_al_quran/slide_images.dart';
 
-import '../util/utility.dart';
-import 'admin_login_page.dart';
-
 class UserData extends StatefulWidget {
   static String id = "User data";
 
@@ -30,82 +27,114 @@ class _UserDataState extends State<UserData> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.of(context).popUntil((route) => route.isFirst);
-        return true;
-      },
-      child: Scaffold(
-        appBar: AppBar(
-
-          actions: [
-
-            IconButton(
-              onPressed: () {
-                _showDialog(context);
-              },
-              icon: const Icon(Icons.logout_outlined),
-              tooltip: "Logout",
-            )
-          ],
-          centerTitle: true,
-          title: const Text(
-            'Tasleem Al-Quran Academy',
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
-          //automaticallyImplyLeading: false,
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              _showDialog(context);
+            },
+            icon: const Icon(Icons.logout_outlined),
+            tooltip: "Logout",
+          )
+        ],
+        centerTitle: true,
+        title: const Text(
+          'Tasleem Al-Quran Academy',
+          style: TextStyle(color: Colors.white),
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-              child: Column(children: [
-            const SizedBox(
-              height: 180,
-              width: 360,
-              child: SlideImage(),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Center(
-              child: Text(
-                "Registered Users",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: Color(0xFF3B2E7E),
-                ),
+        backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
+        //automaticallyImplyLeading: false,
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+            child: Column(children: [
+          const SizedBox(
+            height: 180,
+            width: 360,
+            child: SlideImage(),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Center(
+            child: Text(
+              "Registered Users",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: Color(0xFF3B2E7E),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: 420,
-              width: 400,
-              color: const Color.fromRGBO(10, 91, 144, 1),
-              child: StreamBuilder<QuerySnapshot>(
-                  stream: firestore,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    if (snapshot.hasError) {
-                      return const Center(
-                        child: Text("Some Error"),
-                      );
-                    }
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: 420,
+            width: 400,
+            color: const Color.fromRGBO(10, 91, 144, 1),
+            child: StreamBuilder<QuerySnapshot>(
+                stream: firestore,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return const Center(
+                      child: Text(
+                        "Some Error",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    );
+                  }
+                  if (snapshot.data!.docs.isEmpty) {
+                    return const Center(
+                      child: Text(
+                        "No Data Found",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    );
+                  }
+                  return ListView.builder(
+                      //scrollDirection: Axis.vertical,
 
-                    return ListView.builder(
-                        //scrollDirection: Axis.vertical,
-
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () async {
+                            final result = await showDialog<bool>(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text('Are you sure?'),
+                                content: const Text(
+                                    'This action will permanently delete this data'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, false),
+                                    child: const Text('Cancel'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      FirebaseFirestore.instance
+                                          .collection('Registration')
+                                          .doc(
+                                            '${snapshot.data!.docs[index]['Email']}',
+                                          )
+                                          .delete();
+                                      Navigator.pop(context, true);
+                                    },
+                                    child: const Text('Delete'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          child: Card(
                               color: Colors.white70,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
@@ -150,8 +179,8 @@ class _UserDataState extends State<UserData> {
                                             ]),
                                             Column(children: [
                                               Text(
-                                                  snapshot
-                                                      .data!.docs[index]['Email']
+                                                  snapshot.data!
+                                                      .docs[index]['Email']
                                                       .toString(),
                                                   style: const TextStyle(
                                                       fontSize: 17.0))
@@ -221,17 +250,17 @@ class _UserDataState extends State<UserData> {
                                         ],
                                       ),
                                     ]),
-                              ));
-                        });
-                  }),
-            ),
-          ])),
-        ),
+                              )),
+                        );
+                      });
+                }),
+          ),
+        ])),
       ),
     );
   }
 
-  final auth = FirebaseAuth.instance;
+  // final auth = FirebaseAuth.instance;
   void _showDialog(BuildContext context) {
     showDialog(
       context: context,
