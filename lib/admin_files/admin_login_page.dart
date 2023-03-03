@@ -5,11 +5,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:tasleem_al_quran/admin_files/user_data.dart';
 
-import 'package:tasleem_al_quran/slide_images.dart';
-import 'package:tasleem_al_quran/util/utility.dart';
+import 'package:tasleem_al_quran/util/slide_images.dart';
 
-import '../../bottom_navigation_bar.dart';
-import '../dashboard_files/Register.dart';
+import '../util/open_whatsapp.dart';
+
 
 class AdminPage extends StatefulWidget {
   static String id = "AdminPage";

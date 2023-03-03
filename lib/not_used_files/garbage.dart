@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tasleem_al_quran/slide_images.dart';
+import 'package:tasleem_al_quran/util/slide_images.dart';
 
-import '../bottom_navigation_bar.dart';
+import '../util/open_whatsapp.dart';
+import 'bottom_navigation_bar.dart';
 
 class Home extends StatefulWidget {
   static String id = "Home";

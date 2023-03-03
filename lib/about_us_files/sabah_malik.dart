@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasleem_al_quran/slide_images.dart';
+import 'package:tasleem_al_quran/util/slide_images.dart';
 
 class SabahMalik extends StatelessWidget {
   static String id = "SabahMalik_id";

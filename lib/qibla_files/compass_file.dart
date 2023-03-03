@@ -19,6 +19,7 @@ class _Compass extends State<Compass> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
           title:  const Text(
             'Tasleem Al-Quran Academy',
             style: TextStyle(color: Colors.white, fontSize: 18),

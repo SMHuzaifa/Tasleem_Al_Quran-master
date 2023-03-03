@@ -1,3 +1,49 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+
+import 'package:fluttertoast/fluttertoast.dart';
+
+import 'package:url_launcher/url_launcher.dart';
+
+openWhatsapp() async {
+  final Uri phoneNumber = Uri.parse("+923075015849");
+  final Uri _urlandroid =
+      Uri.parse("whatsapp://send?phone=$phoneNumber&text=Assalam o Alaikum Warahmatullahi  Wabarakatuh!");
+  final Uri _urlios =
+      Uri.parse("https://wa.me/$phoneNumber?text=${(Uri.parse("Assalam o Alaikum Warahmatullahi  Wabarakatuh!"))}");
+
+  if (Platform.isIOS) {
+    if (await canLaunchUrl(_urlios)) {
+      await launchUrl(_urlios);
+    } else {
+      Fluttertoast.showToast(
+          msg: "No WhatsApp Installed",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  } else {
+    if (Platform.isAndroid) {
+      if (await canLaunchUrl(_urlandroid)) {
+        await launchUrl(_urlandroid);
+      } else {
+        Fluttertoast.showToast(
+            msg: "No WhatsApp Installed",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+  }
+}
+
 // import 'package:flutter/material.dart';
 // import 'dart:async';
 //

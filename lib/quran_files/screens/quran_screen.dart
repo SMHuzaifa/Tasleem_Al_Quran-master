@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import 'package:tasleem_al_quran/quran_files/constants/constants.dart';
 import 'package:tasleem_al_quran/quran_files/screens/surah_detail.dart';
+import 'package:tasleem_al_quran/util/routes_name.dart';
+
 
 import '../models/sajda.dart';
 import '../models/surah.dart';
+
 import '../services/api_services.dart';
 import '../widgets/sajda_custom_tile.dart';
 import '../widgets/surah_custem_tile.dart';
@@ -21,6 +25,7 @@ class QuranScreen extends StatefulWidget {
 class _QuranScreenState extends State<QuranScreen> {
 
   ApiServices apiServices = ApiServices();
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +78,14 @@ class _QuranScreenState extends State<QuranScreen> {
                             setState(() {
                               Constants.surahIndex = (index + 1);
                             });
-                            Navigator.pushNamed(context, Surahdetail.id);
+                            PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                              context,
+                              settings: const RouteSettings(name: RoutesName.surahDetails),
+                              screen: const Surahdetail(),
+                              withNavBar: true,
+                              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                            );
+                           // Navigator.pushNamed(context, RoutesName.surahDetails);
                           }),
                      );
                   }
@@ -109,7 +121,16 @@ class _QuranScreenState extends State<QuranScreen> {
                           setState(() {
                             Constants.juzIndex = (index + 1);
                           });
-                          Navigator.pushNamed(context, JuzScreen.id);
+                          PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                            context,
+                            settings: const RouteSettings(name: RoutesName.juzScreen),
+                            screen: const JuzScreen(),
+                            withNavBar: true,
+                            pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                          );
+
+
+                  //        Navigator.pushNamed(context, RoutesName.juzScreen);
                         },
                         child: Card(
                           elevation: 4,

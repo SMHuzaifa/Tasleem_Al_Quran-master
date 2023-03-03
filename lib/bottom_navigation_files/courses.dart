@@ -2,18 +2,22 @@ import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tasleem_al_quran/dashboard_files/about_us.dart';
-import 'package:tasleem_al_quran/quran_files/main.dart';
-import 'package:tasleem_al_quran/slide_images.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+
+
 
 import '../admin_files/admin_login_page.dart';
 import '../admin_files/user_data.dart';
-import '../bottom_navigation_bar.dart';
+import '../not_used_files/bottom_navigation_bar.dart';
 import '../namaz_timing_file/namaz_loc_check.dart';
+import '../util/open_whatsapp.dart';
 import '../qibla_files/compass_file.dart';
+import '../util/routes_name.dart';
 import 'Register.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
+
+import 'about_us.dart';
 
 class Courses extends StatefulWidget {
   static String id = "Courses_id";
@@ -54,7 +58,7 @@ class _CoursesState extends State<Courses> {
         backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
         //automaticallyImplyLeading: false,
       ),
-      drawer: buildDrawer(),
+      drawer: _buildDrawer(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         tooltip: 'Contact Us',
@@ -79,14 +83,14 @@ class _CoursesState extends State<Courses> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(60, 40, 40, 6),
+                      padding: const EdgeInsets.fromLTRB(70, 40, 40, 6),
                       child: Text(
                         formatted,
                         style: const TextStyle(color: Colors.white, fontSize: 30),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(80, 0, 40, 25),
+                      padding: const EdgeInsets.fromLTRB(75, 0, 40, 25),
                       child: RichText(
                         text: TextSpan(children: <InlineSpan>[
                           WidgetSpan(
@@ -164,7 +168,15 @@ class _CoursesState extends State<Courses> {
                         const TextStyle(fontSize: 24, fontStyle: FontStyle.italic)),
 
                     onPressed: (){
-                  Navigator.pushNamed(context, Register.id);
+                      PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                        context,
+                        settings: const RouteSettings(name: RoutesName.register),
+                        screen:  Register(),
+                        withNavBar: true,
+                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                      );
+
+                 // Navigator.pushNamed(context, Register.id);
                 }, child: const Text("Click for Free Trail",style: TextStyle(
 
                     fontWeight: FontWeight.bold,
@@ -322,7 +334,7 @@ class _CoursesState extends State<Courses> {
       ),
     );
   }
-  buildDrawer() {
+  _buildDrawer() {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
     return ClipPath(
@@ -338,15 +350,41 @@ class _CoursesState extends State<Courses> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                  // Container(
+                  //   height: 150,
+                  //   width: 150,
+                  //   alignment: Alignment.center,
+                  //   decoration: const BoxDecoration(
+                  //       //shape: BoxShape.circle,
+                  //       // gradient: LinearGradient(
+                  //       //     colors: [Colors.pink, Colors.deepPurple])
+                  //          ),
+                  //
+                  //   child:  Image(image: AssetImage('assets/tasleemalquranlogo.png'),)
+                  //   ),
+
                   const SizedBox(height: 80.0),
                   _buildRow(Icons.compass_calibration, "Qibla Direction", () {
-                    Navigator.pushNamed(context, Compass.id);
+                    PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                      context,
+                      settings: const RouteSettings(name: RoutesName.compass),
+                      screen:  Compass(),
+                      withNavBar: true,
+                      pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                    );
+
+
+
+                    //Navigator.pushNamed(context, RoutesName.compass);
                   }),
                   _buildDivider(),
                   _buildRow(Icons.calendar_month, "Ramazan Calendar", () {
                     // Navigator.pushNamed(context, Calendar.id);
                     Fluttertoast.showToast(
-                        msg:'Coming Soon',
+                        msg: 'Coming Soon',
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 1,
@@ -359,23 +397,57 @@ class _CoursesState extends State<Courses> {
                     Icons.access_time_filled,
                     "Namaz Timing",
                         () {
-                      Navigator.pushNamed(context, NamazLoccheck.id);
+                      PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                        context,
+                        settings: const RouteSettings(name: RoutesName.namazLocCheck),
+                        screen: const NamazLoccheck(),
+                        withNavBar: true,
+                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                      );
+
+
+                      // Navigator.pushNamed(context, RoutesName.namazLocCheck);
                     },
                     showBadge: true,
                   ),
                   _buildDivider(),
                   _buildRow(Icons.admin_panel_settings, "For Admin", () {
                     if (auth.currentUser != null) {
-                      Navigator.pushNamed(context, UserData.id);
-                    } else {
-                      Navigator.pushNamed(context, AdminPage.id);
-                    }
+                      PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                        context,
+                        settings: const RouteSettings(name: RoutesName.userData),
+                        screen: const UserData(),
+                        withNavBar: true,
+                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                      );
 
+
+
+
+                      //Navigator.pushNamed(context, RoutesName.userData);
+                    } else {
+                      PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                        context,
+                        settings: const RouteSettings(name: RoutesName.adminPage),
+                        screen: const AdminPage(),
+                        withNavBar: true,
+                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                      );
+
+
+                      //Navigator.pushNamed(context, RoutesName.adminPage);
+                    }
                   }, showBadge: true),
                   _buildDivider(),
-                  // _buildRow(Icons.book, "Quran", () {
-                  //   Navigator.pushNamed(context, Quran.id);
-                  // }),
+                  _buildRow(Icons.book, "About Us", () {
+                    PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                      context,
+                      settings: const RouteSettings(name: RoutesName.ourTeam),
+                      screen: const OurTeam(),
+                      withNavBar: true,
+                      pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                      //Navigator.pushNamed(context, Quran.id);
+                    );}),
                   // // _buildDivider(),
                   // // _buildRow(Icons.email, "Contact us", () {
                   // //   print('Tapped contct');
@@ -387,8 +459,10 @@ class _CoursesState extends State<Courses> {
                   const SizedBox(
                     height: 350,
                   ),
-                  const Text("Powered By IT Artificer",style: TextStyle(color: Colors.white),)
-
+                  const Text(
+                    "Powered By IT Artificer",
+                    style: TextStyle(color: Colors.white),
+                  )
                 ],
               ),
             ),

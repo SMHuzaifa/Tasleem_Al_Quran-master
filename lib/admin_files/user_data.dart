@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:tasleem_al_quran/slide_images.dart';
+import 'package:tasleem_al_quran/util/slide_images.dart';
 
 class UserData extends StatefulWidget {
   static String id = "User data";
