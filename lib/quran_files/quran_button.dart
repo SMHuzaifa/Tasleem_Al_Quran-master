@@ -3,34 +3,28 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-import 'package:hijri/hijri_calendar.dart';
-import 'package:intl/intl.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import 'package:tasleem_al_quran/quran_files/models/aya_of_the_day.dart';
-import 'package:tasleem_al_quran/quran_files/screens/qari_screen.dart';
-import 'package:tasleem_al_quran/quran_files/screens/quran_screen.dart';
 
 import 'package:tasleem_al_quran/quran_files/services/api_services.dart';
+import 'package:tasleem_al_quran/util/picture_withdate.dart';
 import 'package:tasleem_al_quran/util/routes_name.dart';
 
 import '../admin_files/admin_login_page.dart';
 import '../admin_files/user_data.dart';
 import '../namaz_timing_file/namaz_loc_check.dart';
 import '../qibla_files/compass_file.dart';
-import 'about_us.dart';
+import '../bottom_navigation_files/about_us.dart';
 
-
-
-class QuranButton extends StatefulWidget {
-  const QuranButton({Key? key}) : super(key: key);
+class Ayat extends StatefulWidget {
+  const Ayat({Key? key}) : super(key: key);
 
   @override
-  _QuranButtonState createState() => _QuranButtonState();
+  _AyatState createState() => _AyatState();
 }
 
-class _QuranButtonState extends State<QuranButton> {
+class _AyatState extends State<Ayat> {
   final ApiServices _apiServices = ApiServices();
   //
   final Color primary = const Color.fromRGBO(10, 91, 144, 1);
@@ -39,13 +33,6 @@ class _QuranButtonState extends State<QuranButton> {
 
   @override
   Widget build(BuildContext context) {
-    var _size = MediaQuery.of(context).size;
-    HijriCalendar.setLocal('ar');
-    var _hijri = HijriCalendar.now();
-    var day = DateTime.now();
-    var format = DateFormat('EEE , d MMM yyyy');
-    var formatted = format.format(day);
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -60,66 +47,7 @@ class _QuranButtonState extends State<QuranButton> {
         drawer: _buildDrawer(),
         body: Column(
           children: [
-            Container(
-              height: _size.height * 0.22, // 22% of screen
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/background_img.jpg'))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(70, 40, 40, 6),
-                    child: Text(
-                      formatted,
-                      style: const TextStyle(color: Colors.white, fontSize: 30),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(75, 0, 40, 25),
-                    child: RichText(
-                      text: TextSpan(children: <InlineSpan>[
-                        WidgetSpan(
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Text(
-                              _hijri.hDay.toString(),
-                              style: const TextStyle(
-                                  fontSize: 27, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                        WidgetSpan(
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Text(
-                              _hijri.longMonthName,
-                              style: const TextStyle(
-                                  fontSize: 23,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                        WidgetSpan(
-                          child: Padding(
-                            padding: const EdgeInsets.all(4),
-                            child: Text(
-                              '${_hijri.hYear} AH',
-                              style: const TextStyle(
-                                  fontSize: 27, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ]),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const PicDate(),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsetsDirectional.only(top: 10, bottom: 20),
@@ -202,81 +130,81 @@ class _QuranButtonState extends State<QuranButton> {
                         }
                       },
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Column(
-                      children: [
-                        // const SizedBox(
-                        //   width: 10,
-                        // ),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 30.0, vertical: 20.0),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0)),
-                              foregroundColor:
-                                  const Color.fromRGBO(10, 91, 144, 1),
-                              backgroundColor:
-                                  const Color.fromRGBO(10, 91, 144, 1),
-                              //onPrimary: Colors.black,
-                            ),
-                            onPressed: () {
-                              PersistentNavBarNavigator
-                                  .pushNewScreenWithRouteSettings(
-                                context,
-                                settings: const RouteSettings(
-                                    name: RoutesName.quranScreen),
-                                screen: const QuranScreen(),
-                                withNavBar: true,
-                                pageTransitionAnimation:
-                                    PageTransitionAnimation.cupertino,
-                              );
-
-                              //  Navigator.pushNamed(context, QuranScreen.id);
-                            },
-                            child: const Text(
-                              "Read Online Quran",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            )),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 30.0, vertical: 20.0),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0)),
-                              foregroundColor:
-                                  const Color.fromRGBO(10, 91, 144, 1),
-                              backgroundColor:
-                                  const Color.fromRGBO(10, 91, 144, 1),
-                              //onPrimary: Colors.black,
-                            ),
-                            onPressed: () {
-                              PersistentNavBarNavigator
-                                  .pushNewScreenWithRouteSettings(
-                                context,
-                                settings: const RouteSettings(
-                                    name: RoutesName.qariListScreen),
-                                screen: const QariListScreen(),
-                                withNavBar: true,
-                                pageTransitionAnimation:
-                                    PageTransitionAnimation.cupertino,
-                              );
-
-                              // Navigator.pushNamed(context, QariListScreen.id);
-                            },
-                            child: const Text(
-                              "Listen Online Quran",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            )),
-                      ],
-                    )
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
+                    // Column(
+                    //   children: [
+                    //     // const SizedBox(
+                    //     //   width: 10,
+                    //     // ),
+                    //     ElevatedButton(
+                    //         style: ElevatedButton.styleFrom(
+                    //           padding: const EdgeInsets.symmetric(
+                    //               horizontal: 30.0, vertical: 20.0),
+                    //           shape: RoundedRectangleBorder(
+                    //               borderRadius: BorderRadius.circular(15.0)),
+                    //           foregroundColor:
+                    //               const Color.fromRGBO(10, 91, 144, 1),
+                    //           backgroundColor:
+                    //               const Color.fromRGBO(10, 91, 144, 1),
+                    //           //onPrimary: Colors.black,
+                    //         ),
+                    //         onPressed: () {
+                    //           PersistentNavBarNavigator
+                    //               .pushNewScreenWithRouteSettings(
+                    //             context,
+                    //             settings: const RouteSettings(
+                    //                 name: RoutesName.quranScreen),
+                    //             screen: const QuranScreen(),
+                    //             withNavBar: true,
+                    //             pageTransitionAnimation:
+                    //                 PageTransitionAnimation.cupertino,
+                    //           );
+                    //
+                    //           //  Navigator.pushNamed(context, QuranScreen.id);
+                    //         },
+                    //         child: const Text(
+                    //           "Read Online Quran",
+                    //           style:
+                    //               TextStyle(color: Colors.white, fontSize: 15),
+                    //         )),
+                    //     const SizedBox(
+                    //       height: 10,
+                    //     ),
+                    //     ElevatedButton(
+                    //         style: ElevatedButton.styleFrom(
+                    //           padding: const EdgeInsets.symmetric(
+                    //               horizontal: 30.0, vertical: 20.0),
+                    //           shape: RoundedRectangleBorder(
+                    //               borderRadius: BorderRadius.circular(15.0)),
+                    //           foregroundColor:
+                    //               const Color.fromRGBO(10, 91, 144, 1),
+                    //           backgroundColor:
+                    //               const Color.fromRGBO(10, 91, 144, 1),
+                    //           //onPrimary: Colors.black,
+                    //         ),
+                    //         onPressed: () {
+                    //           PersistentNavBarNavigator
+                    //               .pushNewScreenWithRouteSettings(
+                    //             context,
+                    //             settings: const RouteSettings(
+                    //                 name: RoutesName.qariListScreen),
+                    //             screen: const QariListScreen(),
+                    //             withNavBar: true,
+                    //             pageTransitionAnimation:
+                    //                 PageTransitionAnimation.cupertino,
+                    //           );
+                    //
+                    //           // Navigator.pushNamed(context, QariListScreen.id);
+                    //         },
+                    //         child: const Text(
+                    //           "Listen Online Quran",
+                    //           style:
+                    //               TextStyle(color: Colors.white, fontSize: 15),
+                    //         )),
+                    //   ],
+                    // )
                   ],
                 ),
               ),
@@ -284,10 +212,9 @@ class _QuranButtonState extends State<QuranButton> {
           ],
         ),
       ),
-
     );
-
   }
+
   _buildDrawer() {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
@@ -325,12 +252,11 @@ class _QuranButtonState extends State<QuranButton> {
                     PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
                       context,
                       settings: const RouteSettings(name: RoutesName.compass),
-                      screen:  Compass(),
+                      screen: Compass(),
                       withNavBar: true,
-                      pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                      pageTransitionAnimation:
+                          PageTransitionAnimation.cupertino,
                     );
-
-
 
                     //Navigator.pushNamed(context, RoutesName.compass);
                   }),
@@ -350,15 +276,16 @@ class _QuranButtonState extends State<QuranButton> {
                   _buildRow(
                     Icons.access_time_filled,
                     "Namaz Timing",
-                        () {
+                    () {
                       PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
                         context,
-                        settings: const RouteSettings(name: RoutesName.namazLocCheck),
+                        settings:
+                            const RouteSettings(name: RoutesName.namazLocCheck),
                         screen: const NamazLoccheck(),
                         withNavBar: true,
-                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.cupertino,
                       );
-
 
                       // Navigator.pushNamed(context, RoutesName.namazLocCheck);
                     },
@@ -369,25 +296,25 @@ class _QuranButtonState extends State<QuranButton> {
                     if (auth.currentUser != null) {
                       PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
                         context,
-                        settings: const RouteSettings(name: RoutesName.userData),
+                        settings:
+                            const RouteSettings(name: RoutesName.userData),
                         screen: const UserData(),
                         withNavBar: true,
-                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.cupertino,
                       );
-
-
-
 
                       //Navigator.pushNamed(context, RoutesName.userData);
                     } else {
                       PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
                         context,
-                        settings: const RouteSettings(name: RoutesName.adminPage),
+                        settings:
+                            const RouteSettings(name: RoutesName.adminPage),
                         screen: const AdminPage(),
                         withNavBar: true,
-                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.cupertino,
                       );
-
 
                       //Navigator.pushNamed(context, RoutesName.adminPage);
                     }
@@ -399,9 +326,11 @@ class _QuranButtonState extends State<QuranButton> {
                       settings: const RouteSettings(name: RoutesName.ourTeam),
                       screen: const OurTeam(),
                       withNavBar: true,
-                      pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                      pageTransitionAnimation:
+                          PageTransitionAnimation.cupertino,
                       //Navigator.pushNamed(context, Quran.id);
-                    );}),
+                    );
+                  }),
                   // // _buildDivider(),
                   // // _buildRow(Icons.email, "Contact us", () {
                   // //   print('Tapped contct');
@@ -454,8 +383,6 @@ class _QuranButtonState extends State<QuranButton> {
       ]),
     );
   }
-
-
 }
 
 class OvalRightBorderClipper extends CustomClipper<Path> {

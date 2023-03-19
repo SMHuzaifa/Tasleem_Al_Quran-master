@@ -89,27 +89,27 @@ class _AudioScreenState extends State<AudioScreen> {
   @override
   Widget build(BuildContext context) {
     // double _width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+          ),
+          title: const Text(
+            'Now Playing',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
           ),
         ),
-        title: const Text(
-          'Now Playing',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
-        ),
-      ),
-      body: SafeArea(
-        child: Container(
+        body: Container(
           padding: const EdgeInsets.all(30),
           child: Column(
             children: [

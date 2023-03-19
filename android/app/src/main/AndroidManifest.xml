@@ -10,6 +10,14 @@
       <queries>
         <package android:name="com.whatsapp" />
     </queries>
+
+    <queries>
+        <!-- to opens https URLs -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
    <application
         android:label="TAQ"
         android:name="${applicationName}"

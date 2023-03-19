@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasleem_al_quran/util/slide_images.dart';
+import 'package:tasleem_al_quran/util/picture_withdate.dart';
+import 'package:tasleem_al_quran/not_used_files/slide_images.dart';
 
 class AyeshaJadoon extends StatelessWidget {
   static String id = "AyeshaJadoon_id";
@@ -11,7 +12,7 @@ class AyeshaJadoon extends StatelessWidget {
       key: key,
       appBar: AppBar(
         title: const Text(
-          'Tasleem Al-Quran Academy',
+          'TAQ Academy',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
@@ -21,11 +22,7 @@ class AyeshaJadoon extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: const [
-              SizedBox(
-                height: 180,
-                width: 360,
-                child: SlideImage(),
-              ),
+              PicDate(),
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 20, 0, 15),
                 child: CircleAvatar(

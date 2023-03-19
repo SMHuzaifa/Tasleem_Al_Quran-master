@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -97,6 +99,60 @@ class ApiServices{
   }
 
 
+
+  // Future<List<Qari>> getQariList() async {
+  //   const url = "https://quranicaudio.com/api/qaris";
+  //   final res = await http.get(Uri.parse(url));
+  //
+  //   final qarilist = <Qari>[];
+  //   final decodedJson = jsonDecode(res.body) as List<dynamic>;
+  //   decodedJson.take(20).forEach((element) {
+  //     qarilist.add(Qari.fromJson(element));
+  //   });
+  //
+  //   qarilist.sort((a, b) => a.name!.join(' ').compareTo(b.name!.join(' ')));
+  //   return qarilist;
+  // }
+
+
+
+  //
+  // Future<List<Qari>> getQariList() async {
+  //   const url = "https://quranicaudio.com/api/qaris";
+  //   final res = await http.get(Uri.parse(url));
+  //
+  //   final qarilist = <Qari>[];
+  //   final decodedJson = jsonDecode(res.body) as List<dynamic>;
+  //   decodedJson.take(50).forEach((element) {
+  //     final qari = Qari.fromjson(element);
+  //     final imageName = qari.name!.toLowerCase().replaceAll(' ', '_') + ".jpg";
+  //     final imagePath = "assets/images/qaris/$imageName";
+  //     final imageFile = File(imagePath);
+  //     if (imageFile.existsSync()) {
+  //       qari.image = Image.asset(imagePath);
+  //     }
+  //     qarilist.add(qari);
+  //   });
+  //   qarilist.sort((a, b) => (a.name! + " " + b.name!).compareTo(b.name! + " " + a.name!));
+  //  // qarilist.sort((a, b) => a.name!.join(' ').compareTo(b.name!.join(' ')));
+  //   return qarilist;
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   List<Qari> qarilist = [];
 
   Future<List<Qari>> getQariList() async {
@@ -105,10 +161,13 @@ class ApiServices{
     final res = await http.get(Uri.parse(url));
 
     jsonDecode(res.body).forEach((element){
-      if(qarilist.length<20) {
+      if(qarilist.length<=161) {
         qarilist.add(Qari.fromjson(element));
       }
+
     });
+
+
     qarilist.sort((a,b)=>a.name!.compareTo(b.name!)); // sort according to A B C
     return qarilist;
   }

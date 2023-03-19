@@ -33,7 +33,7 @@ class _SurahdetailState extends State<Surahdetail> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(backgroundColor:Color.fromRGBO(10, 91, 144, 1),leading: BackButton(onPressed:(){
+        appBar: AppBar(backgroundColor:const Color.fromRGBO(10, 91, 144, 1),leading: BackButton(onPressed:(){
           Navigator.pop;
         },),),
         body: FutureBuilder(
@@ -62,7 +62,7 @@ class _SurahdetailState extends State<Surahdetail> {
         ),
         bottomSheet: SolidBottomSheet(
           headerBar: Container(
-            color: Color.fromRGBO(10, 91, 144, 1),
+            color: const Color.fromRGBO(10, 91, 144, 1),
             height: 50,
             child: const Center(
               child: Text("Swipe me!",style: TextStyle(color: Colors.white),),

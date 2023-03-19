@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tasleem_al_quran/util/slide_images.dart';
+import 'package:tasleem_al_quran/not_used_files/slide_images.dart';
 
 import '../util/open_whatsapp.dart';
 import 'bottom_navigation_bar.dart';
@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         tooltip: 'Contact Us',
-        child: Image.asset('assets/WhatsApp.png'),
+        child: Icon(FontAwesomeIcons.whatsapp,size: 46,),
         onPressed: () {
           openWhatsapp();
         },

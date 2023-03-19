@@ -4,7 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:tasleem_al_quran/util/slide_images.dart';
+import 'package:tasleem_al_quran/not_used_files/slide_images.dart';
+
+import '../util/picture_withdate.dart';
 
 class UserData extends StatefulWidget {
   static String id = "User data";
@@ -40,7 +42,7 @@ class _UserDataState extends State<UserData> {
         ],
         centerTitle: true,
         title: const Text(
-          'Tasleem Al-Quran Academy',
+          'TAQ Academy',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
@@ -49,11 +51,7 @@ class _UserDataState extends State<UserData> {
       body: SafeArea(
         child: SingleChildScrollView(
             child: Column(children: [
-          const SizedBox(
-            height: 180,
-            width: 360,
-            child: SlideImage(),
-          ),
+         const PicDate(),
           const SizedBox(
             height: 20,
           ),

@@ -71,13 +71,15 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:tasleem_al_quran/bottom_navigation_files/about_us.dart';
 
 import '../bottom_navigation_files/Register.dart';
 import '../bottom_navigation_files/courses.dart';
 import '../bottom_navigation_files/fee_chart.dart';
-import '../bottom_navigation_files/home.dart';
-import '../bottom_navigation_files/quran_button.dart';
+
+import '../bottom_navigation_files/my_menue.dart';
 
 class PersistBottom extends StatefulWidget {
   static String id = "Persist";
@@ -90,8 +92,8 @@ class PersistBottom extends StatefulWidget {
 final controller = PersistentTabController(initialIndex: 0);
 List<Widget> _buildScreen() {
   return [
-    const Home(),
-    const QuranButton(),
+    MyMenue(),
+    const OurTeam(),
     const Courses(),
     const Fee(),
     const Register()
@@ -102,9 +104,9 @@ List<PersistentBottomNavBarItem> _navBarItem() {
   return [
     PersistentBottomNavBarItem(
         title: "Home",
-        activeColorPrimary: Colors.red,
+        activeColorPrimary:  const Color.fromRGBO(10, 91, 144, 1),
         inactiveIcon: const Icon(
-          Icons.home,
+          FontAwesomeIcons.house,size: 22,
           color: Color.fromRGBO(10, 91, 144, 1),
         ),
         icon: const Icon(
@@ -112,29 +114,29 @@ List<PersistentBottomNavBarItem> _navBarItem() {
           color: Color.fromRGBO(10, 91, 144, 1),
         )),
     PersistentBottomNavBarItem(
-        title: "Quran",
-        activeColorPrimary: Colors.red,
-        icon: const Icon(
-          Icons.book,
+        title: "About Us",
+        activeColorPrimary:  const Color.fromRGBO(10, 91, 144, 1),
+        icon:  const Icon(
+          FontAwesomeIcons.peopleGroup,
           color: Color.fromRGBO(10, 91, 144, 1),
         )),
     PersistentBottomNavBarItem(
         title: "Courses",
-        activeColorPrimary: Colors.red,
+        activeColorPrimary:  const Color.fromRGBO(10, 91, 144, 1),
         icon: const Icon(
-          Icons.play_lesson,
+          FontAwesomeIcons.chalkboard,
           color: Color.fromRGBO(10, 91, 144, 1),
         )),
     PersistentBottomNavBarItem(
         title: "Fee",
-        activeColorPrimary: Colors.red,
+        activeColorPrimary:  const Color.fromRGBO(10, 91, 144, 1),
         icon: const Icon(
-          Icons.payments,
+          FontAwesomeIcons.moneyBill,
           color: Color.fromRGBO(10, 91, 144, 1),
         )),
     PersistentBottomNavBarItem(
         title: "Register",
-        activeColorPrimary: Colors.red,
+        activeColorPrimary:  const Color.fromRGBO(10, 91, 144, 1),
         icon: const Icon(
           Icons.app_registration,
           color: Color.fromRGBO(10, 91, 144, 1),
@@ -146,15 +148,14 @@ class _PersistBottomState extends State<PersistBottom> {
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
+
       context,
       screens: _buildScreen(),
       items: _navBarItem(),
       controller: controller,
       resizeToAvoidBottomInset: true,
-    navBarStyle: NavBarStyle.style6,
+      navBarStyle: NavBarStyle.style3,
+      hideNavigationBarWhenKeyboardShows: true,
     );
   }
 }
-
-
-

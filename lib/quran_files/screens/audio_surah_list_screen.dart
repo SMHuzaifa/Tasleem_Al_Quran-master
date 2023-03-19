@@ -104,7 +104,7 @@ Widget AudioTile(
                 (number).toString(),
                 style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
+                    fontSize: 10,
                     fontWeight: FontWeight.bold),
               ),
             ),

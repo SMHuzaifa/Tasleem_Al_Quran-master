@@ -1,24 +1,21 @@
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import 'package:tasleem_al_quran/quran_files/main.dart';
-import 'package:tasleem_al_quran/util/slide_images.dart';
+import 'package:tasleem_al_quran/util/picture_withdate.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../admin_files/admin_login_page.dart';
 import '../admin_files/user_data.dart';
-import '../not_used_files/bottom_navigation_bar.dart';
+
 import '../namaz_timing_file/namaz_loc_check.dart';
 import '../util/open_whatsapp.dart';
-import '../qibla_files/compass_file.dart';
-import 'package:hijri/hijri_calendar.dart';
-import 'package:intl/intl.dart';
 
 import '../util/routes_name.dart';
 import 'Register.dart';
-import 'about_us.dart';
 
 class Fee extends StatefulWidget {
   const Fee({Key? key}) : super(key: key);
@@ -35,105 +32,37 @@ class _FeeState extends State<Fee> {
 
   @override
   Widget build(BuildContext context) {
-    var _size = MediaQuery.of(context).size;
-    HijriCalendar.setLocal('ar');
-    var _hijri = HijriCalendar.now();
-    var day = DateTime.now();
-    var format = DateFormat('EEE , d MMM yyyy');
-    var formatted = format.format(day);
-
-
-
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Tasleem Al-Quran Academy',
-          style: TextStyle(color: Colors.white),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'TAQ Academy',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
+          //automaticallyImplyLeading: false,
         ),
-        backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
-        //automaticallyImplyLeading: false,
-      ),
-      drawer: _buildDrawer(),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
-        tooltip: 'Contact Us',
-        child: Image.asset('assets/WhatsApp.png'),
-        onPressed: () {
-          openWhatsapp();
-        },
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+        drawer: buildDrawer(),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.green,
+          tooltip: 'Contact Us',
+          child: const Icon(FontAwesomeIcons.whatsapp,size: 46,),
+          onPressed: () {
+            openWhatsapp();
+          },
+        ),
+        body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                height: _size.height * 0.22, // 22% of screen
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/background_img.jpg'))),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(70, 40, 40, 6),
-                      child: Text(
-                        formatted,
-                        style: const TextStyle(color: Colors.white, fontSize: 30),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(75, 0, 40, 25),
-                      child: RichText(
-                        text: TextSpan(children: <InlineSpan>[
-                          WidgetSpan(
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Text(
-                                _hijri.hDay.toString(),
-                                style: const TextStyle(
-                                    fontSize: 27, color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          WidgetSpan(
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Text(
-                                _hijri.longMonthName,
-                                style: const TextStyle(
-                                    fontSize: 23,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          WidgetSpan(
-                            child: Padding(
-                              padding: const EdgeInsets.all(4),
-                              child: Text(
-                                '${_hijri.hYear} AH',
-                                style: const TextStyle(
-                                    fontSize: 27, color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ]),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              const PicDate(),
               const Padding(
                   padding: EdgeInsets.fromLTRB(0, 15, 190, 2),
                   child: Text(
                     'Fee Structure',
                     style: TextStyle(
                         fontSize: 25,
-                        color: Color.fromRGBO(10, 91, 144, 0.8),
+                        color: Color.fromRGBO(10, 91, 144, 1),
                         fontWeight: FontWeight.bold),
                   )),
 
@@ -167,9 +96,9 @@ class _FeeState extends State<Fee> {
                 child: Text(
                   '5 Days / Week Days Packages:',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
               ),
               const Padding(
@@ -220,8 +149,7 @@ class _FeeState extends State<Fee> {
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                       Column(children: const [
-                        Text('USA',
-                            style: TextStyle(fontSize: 15.0))
+                        Text('USA', style: TextStyle(fontSize: 15.0))
                       ]),
                       Column(children: const [
                         Text('USD 50', style: TextStyle(fontSize: 15.0))
@@ -237,8 +165,7 @@ class _FeeState extends State<Fee> {
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                       Column(children: const [
-                        Text('UK',
-                            style: TextStyle(fontSize: 15.0))
+                        Text('UK', style: TextStyle(fontSize: 15.0))
                       ]),
                       Column(children: const [
                         Text('GBP 40', style: TextStyle(fontSize: 15.0))
@@ -254,8 +181,7 @@ class _FeeState extends State<Fee> {
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                       Column(children: const [
-                        Text('Europe',
-                            style: TextStyle(fontSize: 15.0))
+                        Text('Europe', style: TextStyle(fontSize: 15.0))
                       ]),
                       Column(children: const [
                         Text('EUR 40', style: TextStyle(fontSize: 15.0))
@@ -271,8 +197,7 @@ class _FeeState extends State<Fee> {
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                       Column(children: const [
-                        Text('Australia',
-                            style: TextStyle(fontSize: 15.0))
+                        Text('Australia', style: TextStyle(fontSize: 15.0))
                       ]),
                       Column(children: const [
                         Text('AUD 55', style: TextStyle(fontSize: 15.0))
@@ -288,8 +213,7 @@ class _FeeState extends State<Fee> {
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                       Column(children: const [
-                        Text('UAE',
-                            style: TextStyle(fontSize: 15.0))
+                        Text('UAE', style: TextStyle(fontSize: 15.0))
                       ]),
                       Column(children: const [
                         Text('150 Riyal/\n  Dirham',
@@ -303,32 +227,35 @@ class _FeeState extends State<Fee> {
                   ],
                 ),
               ),
-                Padding(
-                padding: const EdgeInsets.fromLTRB(0, 15, 170, 10),
-                child:  TextButton(
-                  style: TextButton.styleFrom(
-                     // foregroundColor: Color.fromRGBO(10, 91, 144, 1),
-                      backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
-                      textStyle:
-                      const TextStyle(fontSize: 24, fontStyle: FontStyle.italic)),
-                  onPressed: () {
-                    PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
-                      context,
-                      settings: const RouteSettings(name: RoutesName.register),
-                      screen:  const Register(),
-                      withNavBar: true,
-                      pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                    );
+              Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 15, 170, 10),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                        // foregroundColor: Color.fromRGBO(10, 91, 144, 1),
+                        backgroundColor: Colors.amber,
+                        textStyle: const TextStyle(
+                            fontSize: 24, fontStyle: FontStyle.italic)),
+                    onPressed: () {
+                      PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                        context,
+                        settings:
+                            const RouteSettings(name: RoutesName.register),
+                        screen: const Register(),
+                        withNavBar: true,
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.cupertino,
+                      );
 
-
-
-
-
-                //  Navigator.pushNamed(context, Register.id);
-                }, child: const Text("Click For Free Trail",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 19),),
-
-                )
-              ),
+                      //  Navigator.pushNamed(context, Register.id);
+                    },
+                    child: const Text(
+                      "Click For Free Trail",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19),
+                    ),
+                  )),
               // const Padding(
               //   padding: EdgeInsets.fromLTRB(8, 15, 110, 0),
               //   child: Text(
@@ -424,9 +351,13 @@ class _FeeState extends State<Fee> {
               // ),
               const Padding(
                 padding: EdgeInsets.fromLTRB(5, 5, 305, 0),
-                child: Text('Note',style: TextStyle(
-                  color: Color.fromRGBO(10, 91, 144, 0.8),fontSize: 20,fontWeight: FontWeight.bold
-                ),),
+                child: Text(
+                  'Note',
+                  style: TextStyle(
+                      color: Color.fromRGBO(10, 91, 144, 0.8),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               const Padding(
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -441,7 +372,9 @@ class _FeeState extends State<Fee> {
       ),
     );
   }
-  _buildDrawer() {
+
+
+  buildDrawer() {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
     return ClipPath(
@@ -457,63 +390,48 @@ class _FeeState extends State<Fee> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  // SizedBox(
-                  //   height: 30,
-                  // ),
-                  // Container(
-                  //   height: 150,
-                  //   width: 150,
-                  //   alignment: Alignment.center,
-                  //   decoration: const BoxDecoration(
-                  //       //shape: BoxShape.circle,
-                  //       // gradient: LinearGradient(
-                  //       //     colors: [Colors.pink, Colors.deepPurple])
-                  //          ),
-                  //
-                  //   child:  Image(image: AssetImage('assets/tasleemalquranlogo.png'),)
-                  //   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 90,
+                    alignment: Alignment.center,
+                    child: Image.asset('assets/Tasleem white copy.png'),
+                  ),
 
-                  const SizedBox(height: 80.0),
-                  _buildRow(Icons.compass_calibration, "Qibla Direction", () {
-                    PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
-                      context,
-                      settings: const RouteSettings(name: RoutesName.compass),
-                      screen:  Compass(),
-                      withNavBar: true,
-                      pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                    );
-
-
-
-                    //Navigator.pushNamed(context, RoutesName.compass);
+                  const SizedBox(height: 20.0),
+                  _buildRow(FontAwesomeIcons.facebook, "Facebook", () async {
+                    final Uri url =
+                    Uri.parse("https://www.facebook.com/tasleemalquran/");
+                    if (await canLaunchUrl((url))) {
+                      await launchUrl((url));
+                    } else {
+                      throw 'Could not launch try again $url';
+                    }
                   }),
                   _buildDivider(),
-                  _buildRow(Icons.calendar_month, "Ramazan Calendar", () {
+                  _buildRow(FontAwesomeIcons.instagram, "Instagram", () async {
                     // Navigator.pushNamed(context, Calendar.id);
-                    Fluttertoast.showToast(
-                        msg: 'Coming Soon',
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16);
+                    final Uri url = Uri.parse(
+                        "https://www.instagram.com/tasleemalquran/?hl=en");
+                    if (await canLaunchUrl((url))) {
+                      await launchUrl((url));
+                    } else {
+                      throw 'Could not launch try again $url';
+                    }
                   }),
                   _buildDivider(),
                   _buildRow(
-                    Icons.access_time_filled,
-                    "Namaz Timing",
-                        () {
-                      PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
-                        context,
-                        settings: const RouteSettings(name: RoutesName.namazLocCheck),
-                        screen: const NamazLoccheck(),
-                        withNavBar: true,
-                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                      );
-
-
-                      // Navigator.pushNamed(context, RoutesName.namazLocCheck);
+                    FontAwesomeIcons.linkedin,
+                    "Linkedin",
+                        () async {
+                      final Uri url = Uri.parse(
+                          "https://pk.linkedin.com/in/tasleemalquran");
+                      if (await canLaunchUrl((url))) {
+                        await launchUrl((url));
+                      } else {
+                        throw 'Could not launch try again $url';
+                      }
                     },
                     showBadge: true,
                   ),
@@ -522,39 +440,29 @@ class _FeeState extends State<Fee> {
                     if (auth.currentUser != null) {
                       PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
                         context,
-                        settings: const RouteSettings(name: RoutesName.userData),
+                        settings:
+                        const RouteSettings(name: RoutesName.userData),
                         screen: const UserData(),
                         withNavBar: true,
-                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                        pageTransitionAnimation:
+                        PageTransitionAnimation.cupertino,
                       );
-
-
-
-
-                      //Navigator.pushNamed(context, RoutesName.userData);
                     } else {
                       PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
                         context,
-                        settings: const RouteSettings(name: RoutesName.adminPage),
+                        settings:
+                        const RouteSettings(name: RoutesName.adminPage),
                         screen: const AdminPage(),
                         withNavBar: true,
-                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                        pageTransitionAnimation:
+                        PageTransitionAnimation.cupertino,
                       );
-
-
-                      //Navigator.pushNamed(context, RoutesName.adminPage);
                     }
                   }, showBadge: true),
                   _buildDivider(),
-                  _buildRow(Icons.book, "About Us", () {
-                    PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
-                      context,
-                      settings: const RouteSettings(name: RoutesName.ourTeam),
-                      screen: const OurTeam(),
-                      withNavBar: true,
-                      pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                      //Navigator.pushNamed(context, Quran.id);
-                    );}),
+                  // _buildRow(Icons.book, "Quran", () {
+                  //   Navigator.pushNamed(context, Quran.id);
+                  // }),
                   // // _buildDivider(),
                   // // _buildRow(Icons.email, "Contact us", () {
                   // //   print('Tapped contct');
@@ -564,7 +472,7 @@ class _FeeState extends State<Fee> {
                   // //   print('Tapped help');
                   // }),
                   const SizedBox(
-                    height: 350,
+                    height: 300,
                   ),
                   const Text(
                     "Powered By IT Artificer",
@@ -587,13 +495,13 @@ class _FeeState extends State<Fee> {
 
   Widget _buildRow(IconData icon, String title, onTap,
       {bool showBadge = false}) {
-    final TextStyle tStyle = TextStyle(color: active, fontSize: 16.0);
+    final TextStyle tStyle = TextStyle(color: Colors.white, fontSize: 16.0);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: Row(children: [
         Icon(
           icon,
-          color: active,
+          color: Colors.white,
         ),
         const SizedBox(width: 10.0),
         InkWell(

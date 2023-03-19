@@ -29,10 +29,10 @@ class _QuranScreenState extends State<QuranScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3, // Added
-      initialIndex: 0,
-      child: SafeArea(
+    return SafeArea(
+      child: DefaultTabController(
+        length: 3, // Added
+        initialIndex: 0,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color.fromRGBO(10, 91, 144, 1),

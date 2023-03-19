@@ -1,11 +1,13 @@
-import 'package:back_button_interceptor/back_button_interceptor.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:tasleem_al_quran/admin_files/user_data.dart';
+import 'package:tasleem_al_quran/util/picture_withdate.dart';
 
-import 'package:tasleem_al_quran/util/slide_images.dart';
+import 'package:tasleem_al_quran/not_used_files/slide_images.dart';
 
 import '../util/open_whatsapp.dart';
 
@@ -107,7 +109,7 @@ class _AdminPageState extends State<AdminPage> {
         floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.green,
             tooltip: 'Contact Us',
-            child: Image.asset('assets/WhatsApp.png'),
+            child: const Icon(FontAwesomeIcons.whatsapp,size: 46,),
             onPressed: () {
               openWhatsapp();
             }),
@@ -117,11 +119,7 @@ class _AdminPageState extends State<AdminPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 180,
-                    width: 5000,
-                    child: SlideImage(),
-                  ),
+               const PicDate(),
                   const SizedBox(height: 50),
                   SizedBox(
                     width: 500,

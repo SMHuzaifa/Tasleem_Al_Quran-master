@@ -21,5 +21,9 @@ class RoutesName {
   static const String juzScreen = "juzScreen";
   static const String surahDetails = "surahDetails";
   static const String audioSurahListScreen = "audioSurahListScreen";
-  // static const String surahDetails = "saadArshad";
+  static const String searchPage = "searchPage";
+  static const String myMenue = "myMenue";
+  static const String ayat = "ayat";
+  static const String calendar = "calendar";
+  static const String zakat= "zakat";
 }
