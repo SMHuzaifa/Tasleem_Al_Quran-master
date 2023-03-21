@@ -10,6 +10,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:tasleem_al_quran/about_us_files/Noreeba_effendi.dart';
 
 import 'package:tasleem_al_quran/about_us_files/iqra_asad.dart';
+import 'package:tasleem_al_quran/about_us_files/it_artificer.dart';
 
 import 'package:tasleem_al_quran/about_us_files/saad_arshad.dart';
 import 'package:tasleem_al_quran/about_us_files/sabah_malik.dart';
@@ -93,24 +94,17 @@ class _OurTeamState extends State<OurTeam> {
                         const AssetImage('assets/ita.png'),
                         child: GestureDetector(
                           onTap: () {
-                            Fluttertoast.showToast(
-                                msg: '',
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.white,
-                                textColor: Colors.white,
-                                fontSize: 1);
-                            // PersistentNavBarNavigator
-                            //     .pushNewScreenWithRouteSettings(
-                            //   context,
-                            //   settings: const RouteSettings(
-                            //       name: RoutesName.),
-                            //   screen: const IqraAsad(),
-                            //   withNavBar: true,
-                            //   pageTransitionAnimation:
-                            //   PageTransitionAnimation.cupertino,
-                            // );
+
+                            PersistentNavBarNavigator
+                                .pushNewScreenWithRouteSettings(
+                              context,
+                              settings: const RouteSettings(
+                                  name: RoutesName.itArtificer),
+                              screen: const ItArtificer(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
+                            );
 
                             // Navigator.pushNamed(context, IqraAsad.id);
                           },
@@ -184,13 +178,31 @@ class _OurTeamState extends State<OurTeam> {
               //     ),
               //   ),
               // ),
-              // const Text(
-              //   'Saad Arshad',
-              //   style: TextStyle(
-              //       color: Color.fromRGBO(10, 91, 144, 1),
-              //       fontSize: 20,
-              //       fontWeight: FontWeight.bold),
-              // ),
+              Row(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(50, 2, 0, 0),
+                    child: Text(
+                      'IT Artificer',
+                      style: TextStyle(
+                          color: Color.fromRGBO(10, 91, 144, 1),
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(100, 2, 0, 0),
+                    child: Text(
+                      'Saad Arshad',
+                      style: TextStyle(
+                          color: Color.fromRGBO(10, 91, 144, 1),
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+
               //Text('"Team Manager"')
               Row(
                 children: [

@@ -89,7 +89,7 @@ class _ZakatFormState extends State<ZakatForm> {
                 //   return null;
                 // },
                 onChanged: (value) {
-                  _input.cash = double.parse(value!);
+                  _input.cash = double.parse(value);
                 },
               ),
               TextFormField(
@@ -110,7 +110,7 @@ class _ZakatFormState extends State<ZakatForm> {
                 //   return null;
                 // },
                 onChanged: (value) {
-                  _input.bankBalance = double.parse(value!);
+                  _input.bankBalance = double.parse(value);
                 },
               ),
               TextFormField(
@@ -131,7 +131,7 @@ class _ZakatFormState extends State<ZakatForm> {
                 //   return null;
                 // },
                 onChanged: (value) {
-                  _input.stocks = double.parse(value!);
+                  _input.stocks = double.parse(value);
                 },
               ),
               TextFormField(
@@ -152,7 +152,7 @@ class _ZakatFormState extends State<ZakatForm> {
                 //   return null;
                 // },
                 onChanged: (value) {
-                  _input.gold = double.parse(value!);
+                  _input.gold = double.parse(value);
                 },
               ),
               TextFormField(
@@ -173,7 +173,7 @@ class _ZakatFormState extends State<ZakatForm> {
                 //   return null;
                 // },
                 onChanged: (value) {
-                  _input.property = double.parse(value!);
+                  _input.property = double.parse(value);
                 },
               ),
 

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ import 'package:tasleem_al_quran/quran_files/screens/qari_screen.dart';
 import 'package:tasleem_al_quran/quran_files/screens/quran_screen.dart';
 import 'package:tasleem_al_quran/util/picture_withdate.dart';
 import 'package:tasleem_al_quran/zakat.dart';
+import 'package:upgrader/upgrader.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../admin_files/admin_login_page.dart';
@@ -19,7 +22,7 @@ import '../admin_files/user_data.dart';
 
 import '../islamic_calendar.dart';
 import 'home.dart';
-import '../quran_files/quran_button.dart';
+import '../quran_files/ayat_of_the_day.dart';
 import '../namaz_timing_file/namaz_loc_check.dart';
 import '../qibla_files/compass_file.dart';
 import '../util/open_whatsapp.dart';
@@ -86,359 +89,367 @@ class _MyMenueState extends State<MyMenue> {
           },
         ),
 
-        body: SingleChildScrollView(
+        body: UpgradeAlert(
+          upgrader: Upgrader(shouldPopScope: () => true,
+          canDismissDialog: true,
+          durationUntilAlertAgain: const Duration(days:1),
+          dialogStyle: Platform.isIOS ? UpgradeDialogStyle.cupertino : UpgradeDialogStyle.material,
+           ),
 
-          child: Column(
-            children: <Widget>[
-              const PicDate(),
+          child: SingleChildScrollView(
 
-              Container(
-                margin: const EdgeInsets.fromLTRB(25.0, 30.0, 25.0, 80.0),
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(10, 91, 144, 0.4),
-                    borderRadius: BorderRadius.circular(15.0)),
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: ElevatedButton(
-                          style: raisedButtonStyle,
-                          onPressed: () {
-                            PersistentNavBarNavigator
-                                .pushNewScreenWithRouteSettings(
-                              context,
-                              settings:
-                                  const RouteSettings(name: RoutesName.home),
-                              screen: const Home(),
-                              withNavBar: true,
-                              pageTransitionAnimation:
-                                  PageTransitionAnimation.cupertino,
-                            );
-                          },
-                          child: Column(
-                            children: const <Widget>[
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'TAQ Academy',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Icon(FlutterIslamicIcons.mosque,size: 40,)
-                              // Image.asset(
-                              //   height: 45,
-                              //   'assets/home.png',
-                              //   color: Colors.white,
-                              // )
-                            ],
+            child: Column(
+              children: <Widget>[
+                const PicDate(),
+
+                Container(
+                  margin: const EdgeInsets.fromLTRB(25.0, 30.0, 25.0, 80.0),
+                  decoration: BoxDecoration(
+                      color: const Color.fromRGBO(10, 91, 144, 0.4),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: ElevatedButton(
+                            style: raisedButtonStyle,
+                            onPressed: () {
+                              PersistentNavBarNavigator
+                                  .pushNewScreenWithRouteSettings(
+                                context,
+                                settings:
+                                    const RouteSettings(name: RoutesName.home),
+                                screen: const Home(),
+                                withNavBar: true,
+                                pageTransitionAnimation:
+                                    PageTransitionAnimation.cupertino,
+                              );
+                            },
+                            child: Column(
+                              children: const <Widget>[
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'TAQ Academy',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Icon(FlutterIslamicIcons.mosque,size: 40,)
+                                // Image.asset(
+                                //   height: 45,
+                                //   'assets/home.png',
+                                //   color: Colors.white,
+                                // )
+                              ],
+                            ),
+                          )),
+                          const SizedBox(
+                            width: 10.0,
                           ),
-                        )),
-                        const SizedBox(
-                          width: 10.0,
-                        ),
-                        Expanded(
-                            child: ElevatedButton(
-                          style: raisedButtonStyle,
-                          onPressed: () {
-                            PersistentNavBarNavigator
-                                .pushNewScreenWithRouteSettings(
-                              context,
-                              settings: const RouteSettings(
-                                  name: RoutesName.quranScreen),
-                              screen: const QuranScreen(),
-                              withNavBar: true,
-                              pageTransitionAnimation:
-                                  PageTransitionAnimation.cupertino,
-                            );
-                          },
-                          child: Column(
-                            children: const <Widget>[
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Read Quran',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Icon(FlutterIslamicIcons.quran,size: 45,)
-                              // Image.asset(
-                              //   height: 45,
-                              //   'assets/holyQuran.png',
-                              //   color: Colors.white,
-                              // )
-                            ],
+                          Expanded(
+                              child: ElevatedButton(
+                            style: raisedButtonStyle,
+                            onPressed: () {
+                              PersistentNavBarNavigator
+                                  .pushNewScreenWithRouteSettings(
+                                context,
+                                settings: const RouteSettings(
+                                    name: RoutesName.quranScreen),
+                                screen: const QuranScreen(),
+                                withNavBar: true,
+                                pageTransitionAnimation:
+                                    PageTransitionAnimation.cupertino,
+                              );
+                            },
+                            child: Column(
+                              children: const <Widget>[
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'Read Quran',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Icon(FlutterIslamicIcons.quran,size: 45,)
+                                // Image.asset(
+                                //   height: 45,
+                                //   'assets/holyQuran.png',
+                                //   color: Colors.white,
+                                // )
+                              ],
+                            ),
+                          )),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: ElevatedButton(
+                            style: raisedButtonStyle,
+                            onPressed: () {
+                              PersistentNavBarNavigator
+                                  .pushNewScreenWithRouteSettings(
+                                context,
+                                settings: const RouteSettings(
+                                    name: RoutesName.qariListScreen),
+                                screen: const QariListScreen(),
+                                withNavBar: true,
+                                pageTransitionAnimation:
+                                    PageTransitionAnimation.cupertino,
+                              );
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                const Text(
+                                  'Listen Quran',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                const SizedBox(
+                                  height: 3,
+                                ),
+                                Image.asset(
+                                  height: 45,
+                                  'assets/holyQuran.png',
+                                  color: Colors.white,
+                                ),
+                              ],
+                            ),
+                          )),
+                          const SizedBox(
+                            width: 10.0,
                           ),
-                        )),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: ElevatedButton(
-                          style: raisedButtonStyle,
-                          onPressed: () {
-                            PersistentNavBarNavigator
-                                .pushNewScreenWithRouteSettings(
-                              context,
-                              settings: const RouteSettings(
-                                  name: RoutesName.qariListScreen),
-                              screen: const QariListScreen(),
-                              withNavBar: true,
-                              pageTransitionAnimation:
-                                  PageTransitionAnimation.cupertino,
-                            );
-                          },
-                          child: Column(
-                            children: <Widget>[
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Text(
-                                'Listen Quran',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              const SizedBox(
-                                height: 3,
-                              ),
-                              Image.asset(
-                                height: 45,
-                                'assets/holyQuran.png',
-                                color: Colors.white,
-                              ),
-                            ],
+                          Expanded(
+                              child: ElevatedButton(
+                            style: raisedButtonStyle,
+                            onPressed: () {
+                              PersistentNavBarNavigator
+                                  .pushNewScreenWithRouteSettings(
+                                context,
+                                settings:
+                                    const RouteSettings(name: RoutesName.compass),
+                                screen: Compass(),
+                                withNavBar: true,
+                                pageTransitionAnimation:
+                                    PageTransitionAnimation.cupertino,
+                              );
+                            },
+                            child: Column(
+                              children: const <Widget>[
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'Qibla Direction',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Icon(FlutterIslamicIcons.qibla,size: 45,)
+                                // Image.asset(
+                                //   height: 45,
+                                //   'assets/qibla_icon.png',
+                                //   color: Colors.white,
+                                // ),
+                              ],
+                            ),
+                          )),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: ElevatedButton(
+                            style: raisedButtonStyle,
+                            onPressed: () {
+                              PersistentNavBarNavigator
+                                  .pushNewScreenWithRouteSettings(
+                                context,
+                                settings: const RouteSettings(
+                                    name: RoutesName.namazLocCheck),
+                                screen: const NamazLoccheck(),
+                                withNavBar: true,
+                                pageTransitionAnimation:
+                                    PageTransitionAnimation.cupertino,
+                              );
+                            },
+                            child: Column(
+                              children: const <Widget>[
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'Prayer Times',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Icon(FlutterIslamicIcons.prayingPerson,size: 45,)
+                                // Image.asset(
+                                //   height: 45,
+                                //   'assets/mosque.png',
+                                //   color: Colors.white,
+                                // ),
+                              ],
+                            ),
+                          )),
+                          const SizedBox(
+                            width: 10,
                           ),
-                        )),
-                        const SizedBox(
-                          width: 10.0,
-                        ),
-                        Expanded(
-                            child: ElevatedButton(
-                          style: raisedButtonStyle,
-                          onPressed: () {
-                            PersistentNavBarNavigator
-                                .pushNewScreenWithRouteSettings(
-                              context,
-                              settings:
-                                  const RouteSettings(name: RoutesName.compass),
-                              screen: Compass(),
-                              withNavBar: true,
-                              pageTransitionAnimation:
-                                  PageTransitionAnimation.cupertino,
-                            );
-                          },
-                          child: Column(
-                            children: const <Widget>[
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Qibla Direction',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Icon(FlutterIslamicIcons.qibla,size: 45,)
-                              // Image.asset(
-                              //   height: 45,
-                              //   'assets/qibla_icon.png',
-                              //   color: Colors.white,
-                              // ),
-                            ],
-                          ),
-                        )),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: ElevatedButton(
-                          style: raisedButtonStyle,
-                          onPressed: () {
-                            PersistentNavBarNavigator
-                                .pushNewScreenWithRouteSettings(
-                              context,
-                              settings: const RouteSettings(
-                                  name: RoutesName.namazLocCheck),
-                              screen: const NamazLoccheck(),
-                              withNavBar: true,
-                              pageTransitionAnimation:
-                                  PageTransitionAnimation.cupertino,
-                            );
-                          },
-                          child: Column(
-                            children: const <Widget>[
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Prayer Times',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Icon(FlutterIslamicIcons.prayingPerson,size: 45,)
-                              // Image.asset(
-                              //   height: 45,
-                              //   'assets/mosque.png',
-                              //   color: Colors.white,
-                              // ),
-                            ],
-                          ),
-                        )),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: ElevatedButton(
-                          style: raisedButtonStyle,
-                          onPressed: () {
-                            // PersistentNavBarNavigator
-                            //     .pushNewScreenWithRouteSettings(
-                            //   context,
-                            //   settings: const RouteSettings(
-                            //       name: RoutesName.zakat),
-                            //   screen: ZakatApp(),
-                            //   withNavBar: true,
-                            //   pageTransitionAnimation:
-                            //   PageTransitionAnimation.cupertino,
-                            // );
+                          Expanded(
+                              child: ElevatedButton(
+                            style: raisedButtonStyle,
+                            onPressed: () {
+                              // PersistentNavBarNavigator
+                              //     .pushNewScreenWithRouteSettings(
+                              //   context,
+                              //   settings: const RouteSettings(
+                              //       name: RoutesName.zakat),
+                              //   screen: ZakatApp(),
+                              //   withNavBar: true,
+                              //   pageTransitionAnimation:
+                              //   PageTransitionAnimation.cupertino,
+                              // );
 
 
 
 
-                            Fluttertoast.showToast(
-                                msg: 'Coming Soon',
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16);
+                              Fluttertoast.showToast(
+                                  msg: 'Coming Soon',
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16);
 
-                          },
-                          child: Column(
-                            children: <Widget>[
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Text(
-                                'Islamic Calendar',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              const SizedBox(
-                                height: 2,
-                              ),
-                              Image.asset(
-                                height: 45,
-                                'assets/calendar.png',
-                                color: Colors.white,
-                              ),
-                            ],
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                const Text(
+                                  'Islamic Calendar',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                const SizedBox(
+                                  height: 2,
+                                ),
+                                Image.asset(
+                                  height: 45,
+                                  'assets/calendar.png',
+                                  color: Colors.white,
+                                ),
+                              ],
+                            ),
+                          )),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: ElevatedButton(
+                            style: raisedButtonStyle,
+                            onPressed: () {
+                              PersistentNavBarNavigator
+                                  .pushNewScreenWithRouteSettings(
+                                context,
+                                settings:
+                                    const RouteSettings(name: RoutesName.ayat),
+                                screen: const Ayat(),
+                                withNavBar: true,
+                                pageTransitionAnimation:
+                                    PageTransitionAnimation.cupertino,
+                              );
+                            },
+                            child: Column(
+                              children: const <Widget>[
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'Ayat of the Day',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                SizedBox(
+                                  height: 0.1,
+                                ),
+                                Icon(FlutterIslamicIcons.quran2,size: 40,)
+                                // Image.asset(
+                                //   height: 45,
+                                //   'assets/ayat.png',
+                                //   color: Colors.white,
+                                // ),
+                              ],
+                            ),
+                          )),
+                          const SizedBox(
+                            width: 10,
                           ),
-                        )),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: ElevatedButton(
-                          style: raisedButtonStyle,
-                          onPressed: () {
-                            PersistentNavBarNavigator
-                                .pushNewScreenWithRouteSettings(
-                              context,
-                              settings:
-                                  const RouteSettings(name: RoutesName.ayat),
-                              screen: const Ayat(),
-                              withNavBar: true,
-                              pageTransitionAnimation:
-                                  PageTransitionAnimation.cupertino,
-                            );
-                          },
-                          child: Column(
-                            children: const <Widget>[
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Ayat of the Day',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              SizedBox(
-                                height: 0.1,
-                              ),
-                              Icon(FlutterIslamicIcons.quran2,size: 40,)
-                              // Image.asset(
-                              //   height: 45,
-                              //   'assets/ayat.png',
-                              //   color: Colors.white,
-                              // ),
-                            ],
-                          ),
-                        )),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: ElevatedButton(
-                          style: raisedButtonStyle,
-                          onPressed: () {
-                            PersistentNavBarNavigator
-                                .pushNewScreenWithRouteSettings(
-                              context,
-                              settings:
-                              const RouteSettings(name: RoutesName.zakat),
-                              screen:  ZakatApp(),
-                              withNavBar: true,
-                              pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                            );
-                          },
-                          child: Column(
-                            children: <Widget>[
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Text(
-                                'Calculate Zakat',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              const SizedBox(
-                                height: 0.1,
-                              ),
-                              Icon(FlutterIslamicIcons.zakat,size: 42,)
-                            ],
-                          ),
-                        )),
-                      ],
-                    ),
-                    // const SizedBox(
-                    //   height: 10.0,
-                    // ),
-                  ],
+                          Expanded(
+                              child: ElevatedButton(
+                            style: raisedButtonStyle,
+                            onPressed: () {
+                              PersistentNavBarNavigator
+                                  .pushNewScreenWithRouteSettings(
+                                context,
+                                settings:
+                                const RouteSettings(name: RoutesName.zakat),
+                                screen:  ZakatApp(),
+                                withNavBar: true,
+                                pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                              );
+                            },
+                            child: Column(
+                              children: const <Widget>[
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'Calculate Zakat',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                SizedBox(
+                                  height: 0.1,
+                                ),
+                                Icon(FlutterIslamicIcons.zakat,size: 42,)
+                              ],
+                            ),
+                          )),
+                        ],
+                      ),
+                      // const SizedBox(
+                      //   height: 10.0,
+                      // ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

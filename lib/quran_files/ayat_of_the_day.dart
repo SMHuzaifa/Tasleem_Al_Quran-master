@@ -36,6 +36,7 @@ class _AyatState extends State<Ayat> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+
           centerTitle: true,
           title: const Text(
             'Tasleem Al-Quran Academy',
@@ -124,6 +125,7 @@ class _AyatState extends State<Ayat> {
                                       ),
                                     ]),
                                   ),
+
                                 ],
                               ),
                             );

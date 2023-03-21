@@ -9,7 +9,7 @@
 //
 // import 'package:tasleem_al_quran/dashboard_files/home.dart';
 // import 'package:tasleem_al_quran/dashboard_files/about_us.dart';
-// import 'package:tasleem_al_quran/dashboard_files/quran_button.dart';
+// import 'package:tasleem_al_quran/dashboard_files/ayat_of_the_day.dart';
 // import 'package:tasleem_al_quran/quran_files/main.dart';
 // import 'package:url_launcher/url_launcher.dart';
 //

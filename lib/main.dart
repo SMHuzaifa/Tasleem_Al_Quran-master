@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
       title: 'TAQ Academy',
       initialRoute: RoutesName.persistBottom,
       onGenerateRoute: Routes.generateRoute,
+
       // routes: {
       //   MyNavigationBar.id: (context) => const MyNavigationBar(),
       //   //MyMenue.id: (context) => MyMenue(),

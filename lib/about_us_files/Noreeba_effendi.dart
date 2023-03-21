@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasleem_al_quran/util/picture_withdate.dart';
-import 'package:tasleem_al_quran/not_used_files/slide_images.dart';
+
 
 class NoreebaEffendi extends StatelessWidget {
   static String id = "NoreebaEffendi_id";

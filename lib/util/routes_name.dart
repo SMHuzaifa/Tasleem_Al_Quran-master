@@ -26,4 +26,5 @@ class RoutesName {
   static const String ayat = "ayat";
   static const String calendar = "calendar";
   static const String zakat= "zakat";
+  static const String itArtificer = "itArtificer";
 }

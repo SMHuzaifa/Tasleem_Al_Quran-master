@@ -52,28 +52,28 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          //key: key,
-          appBar: AppBar(
-            centerTitle: true,
-            title: const Text(
-              'TAQ Academy',
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
-            //automaticallyImplyLeading: false,
+    return Scaffold(
+        //key: key,
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'TAQ Academy',
+            style: TextStyle(color: Colors.white),
           ),
-          drawer: buildDrawer(),
-          floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.green,
-              tooltip: 'Contact Us',
-              child: const Icon(FontAwesomeIcons.whatsapp,size: 46,),
-              onPressed: () {
-                openWhatsapp();
-              }),
-          body: ModalProgressHUD(
-            inAsyncCall: showSpinner,
+          backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
+          //automaticallyImplyLeading: false,
+        ),
+        drawer: buildDrawer(),
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.green,
+            tooltip: 'Contact Us',
+            child: const Icon(FontAwesomeIcons.whatsapp,size: 46,),
+            onPressed: () {
+              openWhatsapp();
+            }),
+        body: ModalProgressHUD(
+          inAsyncCall: showSpinner,
+          child: SafeArea(
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -385,8 +385,8 @@ class _RegisterState extends State<Register> {
                 ],
               ),
             ),
-          )),
-    );
+          ),
+        ));
   }
 
 

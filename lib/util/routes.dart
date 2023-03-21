@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tasleem_al_quran/about_us_files/Noreeba_effendi.dart';
 import 'package:tasleem_al_quran/about_us_files/ayesha_jadoon.dart';
 import 'package:tasleem_al_quran/about_us_files/iqra_asad.dart';
+import 'package:tasleem_al_quran/about_us_files/it_artificer.dart';
 import 'package:tasleem_al_quran/about_us_files/saad_arshad.dart';
 import 'package:tasleem_al_quran/about_us_files/sabah_malik.dart';
 import 'package:tasleem_al_quran/admin_files/admin_login_page.dart';
@@ -29,7 +30,7 @@ import '../bottom_navigation_files/about_us.dart';
 import '../bottom_navigation_files/courses.dart';
 import '../bottom_navigation_files/fee_chart.dart';
 import '../bottom_navigation_files/home.dart';
-import '../quran_files/quran_button.dart';
+import '../quran_files/ayat_of_the_day.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -110,6 +111,8 @@ class Routes {
 
       case RoutesName.zakat:
         return MaterialPageRoute(builder: (context) =>   ZakatApp());
+      case RoutesName.itArtificer:
+        return MaterialPageRoute(builder: (context) => ItArtificer());
 
       default:
         return MaterialPageRoute(builder: (context) {

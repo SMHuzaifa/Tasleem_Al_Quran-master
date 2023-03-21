@@ -1,6 +1,6 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
-// import 'package:tasleem_al_quran/quran_files/quran_button.dart';
+// import 'package:tasleem_al_quran/quran_files/ayat_of_the_day.dart';
 //
 // import 'dashboard_files/Register.dart';
 // import 'dashboard_files/courses.dart';
