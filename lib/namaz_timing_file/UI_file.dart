@@ -33,167 +33,172 @@ class _PrayTimesState extends State<PrayTimes> {
 
           if (snapshot.hasData) {
             return Container(
-              decoration: const BoxDecoration(
-                gradient: RadialGradient(
-                  colors: [
-                    Color(0Xffffecd2),Color(0Xfffcb69f)
-                  ]
-                )
-              ),
+              decoration:  BoxDecoration(
+                   color: Colors.black12.withOpacity(0.01)),
               child: Center(
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(50),
+                      padding: const EdgeInsets.only(
+                          left: 10, right: 10, bottom: 30, top: 30),
                       child: Column(
                         children: <Widget>[
-                          Card(
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
                               color: const Color.fromRGBO(10, 91, 144, 1),
-                              child: Text(snapshot.data.data.meta.timezone,
-                                  style: const TextStyle(
-                                      fontSize: 30, color: Colors.white))),
+                            ),
+                            child: Text(
+                                '📍 ${snapshot.data.data.meta.timezone}',
+                                style: const TextStyle(
+                                    fontSize: 28, color: Colors.white)),
+                          ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color.fromRGBO(10, 91, 144, 1),
+                      ),
                       child: Column(
                         children: <Widget>[
                           Container(
-
-
-                            color: const Color.fromRGBO(10, 91, 144, 1),
-                            height: 65,
-                            child: ListTile(
-                              isThreeLine: true,
-
-                              title: const Text(
-                                "Fajr",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                              ),
-
-                              subtitle: Text(snapshot.data.data.timings.fajr,
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.white)),
-                              trailing: const Icon(
-                                Icons.sunny,
-                                color: Colors.yellow,
-                              ),
-                              // dense: true,
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                             color: Colors.white38
                             ),
+                            height: 65,
+                            child:  Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Image.asset('assets/fajar.ico'),
+                                const Text(
+                                  "Fajar",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25),
+                                ),
+                                Text(snapshot.data.data.timings.fajr,
+                                    style: const TextStyle(
+                                        fontSize: 20, color: Colors.white)),
+                              ],
+                            )
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           Container(
-
-                            color: const Color.fromRGBO(10, 91, 144, 1),
-                            height: 65,
-                            child: ListTile(
-                              isThreeLine: true,
-
-                              title: const Text(
-                                "Dhuhr",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white38
                               ),
-
-                              subtitle: Text(snapshot.data.data.timings.dhuhr,
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.white)),
-                              trailing: const Icon(
-                                Icons.sunny,
-                                color: Colors.yellow,
-                              ),
-                              // dense: true,
-                            ),
+                              height: 65,
+                              child:  Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image.asset('assets/zuhr.png',height: 35,),
+                                  const Text(
+                                    "Zuhar",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25),
+                                  ),
+                                  Text(snapshot.data.data.timings.dhuhr,
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.white)),
+                                ],
+                              )
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           Container(
-                            color: const Color.fromRGBO(10, 91, 144, 1),
-                            height: 65,
-                            child: ListTile(
-                              isThreeLine: true,
-
-                              title: const Text(
-                                "Asr",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white38
                               ),
-
-                              subtitle: Text(snapshot.data.data.timings.asr,
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.white)),
-                              trailing: const Icon(
-                                Icons.sunny_snowing,
-                                color: Colors.yellow,
-                              ),
-                              // dense: true,
-                            ),
+                              height: 65,
+                              child:  Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image.asset('assets/asr.png',height: 35,),
+                                  const Text(
+                                    "Asar",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25),
+                                  ),
+                                  Text(snapshot.data.data.timings.asr,
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.white)),
+                                ],
+                              )
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           Container(
-                            color: const Color.fromRGBO(10, 91, 144, 1),
-                            height: 65,
-                            child: ListTile(
-                              isThreeLine: true,
-
-                              title: const Text(
-                                "Maghrib",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white38
                               ),
-
-                              subtitle: Text(snapshot.data.data.timings.maghrib,
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.white)),
-                              trailing: const Icon(
-                                Icons.sunny_snowing,
-                                color: Colors.yellow,
-                              ),
-                              // dense: true,
-                            ),
+                              height: 65,
+                              child:  Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image.asset('assets/maghrib.png',height: 35,),
+                                  const Text(
+                                    "Maghrib",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25),
+                                  ),
+                                  Text(snapshot.data.data.timings.maghrib,
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.white)),
+                                ],
+                              )
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           Container(
-                            color: const Color.fromRGBO(10, 91, 144, 1),
-                            height: 65,
-                            child: ListTile(
-                              isThreeLine: true,
-
-                              title: const Text(
-                                "Isha",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white38
                               ),
-
-                              subtitle: Text(snapshot.data.data.timings.isha,
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.white)),
-                              trailing: const Icon(
-                                Icons.sunny_snowing,
-                                color: Colors.yellow,
-                              ),
-                              // dense: true,
-                            ),
+                              height: 65,
+                              child:  Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image.asset('assets/night.png',height: 35,),
+                                  const Text(
+                                    "Isha",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25),
+                                  ),
+                                  Text(snapshot.data.data.timings.isha,
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.white)),
+                                ],
+                              )
                           ),
+
                         ],
                       ),
                     ),

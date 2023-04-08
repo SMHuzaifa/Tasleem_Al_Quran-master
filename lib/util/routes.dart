@@ -110,9 +110,11 @@ class Routes {
         return MaterialPageRoute(builder: (context) => const Ayat());
 
       case RoutesName.zakat:
-        return MaterialPageRoute(builder: (context) =>   ZakatApp());
+        return MaterialPageRoute(builder: (context) =>   const ZakatApp());
       case RoutesName.itArtificer:
-        return MaterialPageRoute(builder: (context) => ItArtificer());
+        return MaterialPageRoute(builder: (context) => const ItArtificer());
+      case RoutesName.calendar:
+        return MaterialPageRoute(builder: (context) =>const CalenderPage());
 
       default:
         return MaterialPageRoute(builder: (context) {

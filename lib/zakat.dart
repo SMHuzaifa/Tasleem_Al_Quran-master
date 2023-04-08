@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 
 void main() {
-  runApp(ZakatApp());
+  runApp(const ZakatApp());
 }
 
 class ZakatApp extends StatelessWidget {
+  const ZakatApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Zakat Calculator'),
+        title: const Text('Zakat Calculator'),
         centerTitle: true,
-        backgroundColor: Color.fromRGBO(10, 91, 144, 1),
+        backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
       ),
-      body: ZakatForm(),
+      body: const ZakatForm(),
     );
   }
 }
@@ -37,19 +38,24 @@ class ZakatInput {
 }
 
 class ZakatForm extends StatefulWidget {
+  const ZakatForm({super.key});
+
   @override
-  _ZakatFormState createState() => _ZakatFormState();
+  State<ZakatForm> createState() => _ZakatFormState();
 }
 
 class _ZakatFormState extends State<ZakatForm> {
-  TextEditingController _cashController = TextEditingController();
-  TextEditingController _bankController = TextEditingController();
-  TextEditingController _goldController = TextEditingController();
-  TextEditingController _stockController = TextEditingController();
-  TextEditingController _propertyController = TextEditingController();
+  final TextEditingController _cashController = TextEditingController();
+  final TextEditingController _bankController = TextEditingController();
+  final TextEditingController _goldController = TextEditingController();
+  final TextEditingController _stockController = TextEditingController();
+  final TextEditingController _propertyController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   late ZakatInput _input;
+
+  double zakatAmount = 0.0;
+
 
   @override
   void initState() {
@@ -136,12 +142,9 @@ class _ZakatFormState extends State<ZakatForm> {
               ),
               TextFormField(
                 controller: _goldController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Gold',
-                  prefixIcon: Icon(
-                    Icons.attach_money,
-                    color: Color.fromRGBO(10, 91, 144, 1),
-                  ),
+                  prefixIcon: Image.asset('assets/pkr.png'),
                   hintText: 'Enter Gold Value',
                 ),
                 keyboardType: TextInputType.number,
@@ -157,12 +160,9 @@ class _ZakatFormState extends State<ZakatForm> {
               ),
               TextFormField(
                 controller: _propertyController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Property',
-                  prefixIcon: Icon(
-                    Icons.attach_money,
-                    color: Color.fromRGBO(10, 91, 144, 1),
-                  ),
+                  prefixIcon: Image.asset('assets/pkr.png'),
                   hintText: 'Enter Property Value',
                 ),
                 keyboardType: TextInputType.number,
@@ -198,7 +198,7 @@ class _ZakatFormState extends State<ZakatForm> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                      Color.fromRGBO(10, 91, 144, 1), // Change the color here..
+                      const Color.fromRGBO(10, 91, 144, 1), // Change the color here..
                   elevation: 0,
                   // ...
                 ),
@@ -211,17 +211,53 @@ class _ZakatFormState extends State<ZakatForm> {
                   //     backgroundColor: Colors.red,
                   //     textColor: Colors.white,
                   //     fontSize: 16);
-                  ZakatInput input = ZakatInput(
-                    cash: double.tryParse(_cashController.text) ?? 0,
-                    bankBalance: double.tryParse(_bankController.text) ?? 0,
-                    stocks: double.tryParse(_stockController.text) ?? 0,
-                    gold: double.tryParse(_goldController.text) ?? 0,
-                    property: double.tryParse(_propertyController.text) ?? 0,
-                  );
-                  _showZakatDialog(context, input);
+                 setState(() {
+                   ZakatInput input = ZakatInput(
+                     cash: double.tryParse(_cashController.text) ?? 0,
+                     bankBalance: double.tryParse(_bankController.text) ?? 0,
+                     stocks: double.tryParse(_stockController.text) ?? 0,
+                     gold: double.tryParse(_goldController.text) ?? 0,
+                     property: double.tryParse(_propertyController.text) ?? 0,
+                   );
+                   _showZakatDialog(context, input);
+
+                 });
                 },
                 child: const Text('Calculate'),
               ),
+              const SizedBox(height: 20),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Your Zakat amount in PKR is:',style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600
+                    ),),
+                    const SizedBox(height: 10),
+                    Container(
+                      //margin: const EdgeInsets.only(),
+                      height: 45,
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: const Color.fromRGBO(10, 91, 144, 1),
+                          width: 2
+                        )
+                      ),
+                      child: Center(
+                        child: Text( zakatAmount.toStringAsFixed(2),style: const TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600
+                        ),),
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -253,24 +289,24 @@ class _ZakatFormState extends State<ZakatForm> {
           textColor: Colors.white,
           fontSize: 16);
     } else {
-      double zakatAmount = _calculateZakat(input);
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Zakat Amount'),
-            content: Text('Your Zakat amount is: ${zakatAmount.toStringAsFixed(2)}'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
+      zakatAmount = _calculateZakat(input);
+      // showDialog(
+      //   context: context,
+      //   builder: (BuildContext context) {
+      //     return AlertDialog(
+      //       title: const Text('Zakat Amount'),
+      //       content: Text('Your Zakat amount is: ${zakatAmount.toStringAsFixed(2)}'),
+      //       actions: [
+      //         TextButton(
+      //           onPressed: () {
+      //             Navigator.of(context).pop();
+      //           },
+      //           child: const Text('OK'),
+      //         ),
+      //       ],
+      //     );
+      //   },
+      // );
     }
   }
 

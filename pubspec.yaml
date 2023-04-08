@@ -6,7 +6,7 @@ description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 1.0.19+20
+version: 1.0.21+22
 
 environment:
   sdk: '>=2.18.5 <3.0.0'
@@ -70,6 +70,8 @@ dependencies:
   flutter_localization: ^0.1.10
   cached_network_image: ^3.2.3
   upgrader: ^6.2.0
+  jhijri_picker: ^1.0.0
+  jhijri: ^0.0.4
 
 
 

@@ -26,20 +26,19 @@ class _PicDateState extends State<PicDate> {
       decoration: const BoxDecoration(
           image: DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage('assets/background_img.jpg'))),
+              image: AssetImage('assets/bg2.jpg'))),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(65, 40, 40, 6),
+          Center(
             child: Text(
               formatted,
-              style: const TextStyle(color: Colors.white, fontSize: 30),
+              style: const TextStyle(color: Colors.white, fontSize: 27),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(73, 0, 40, 25),
+            padding: const EdgeInsets.fromLTRB(60, 0, 40, 25),
             child: RichText(
               text: TextSpan(children: <InlineSpan>[
                 WidgetSpan(

@@ -9,6 +9,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:tasleem_al_quran/hadees_of_the_day.dart';
+import 'package:tasleem_al_quran/islamic_date_in_history.dart';
 
 import 'package:tasleem_al_quran/quran_files/screens/qari_screen.dart';
 import 'package:tasleem_al_quran/quran_files/screens/quran_screen.dart';
@@ -31,7 +33,7 @@ import '../util/routes_name.dart';
 class MyMenue extends StatefulWidget {
   static String id = "MyMenue_id";
 
-  MyMenue({super.key});
+  const MyMenue({super.key});
 
   @override
   State<MyMenue> createState() => _MyMenueState();
@@ -319,28 +321,28 @@ class _MyMenueState extends State<MyMenue> {
                               child: ElevatedButton(
                             style: raisedButtonStyle,
                             onPressed: () {
-                              // PersistentNavBarNavigator
-                              //     .pushNewScreenWithRouteSettings(
-                              //   context,
-                              //   settings: const RouteSettings(
-                              //       name: RoutesName.zakat),
-                              //   screen: ZakatApp(),
-                              //   withNavBar: true,
-                              //   pageTransitionAnimation:
-                              //   PageTransitionAnimation.cupertino,
-                              // );
+                              PersistentNavBarNavigator
+                                  .pushNewScreenWithRouteSettings(
+                                context,
+                                settings: const RouteSettings(
+                                    name: RoutesName.calendar),
+                                screen: const CalenderPage(),
+                                withNavBar: true,
+                                pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                              );
 
 
 
 
-                              Fluttertoast.showToast(
-                                  msg: 'Coming Soon',
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16);
+                              // Fluttertoast.showToast(
+                              //     msg: 'Coming Soon',
+                              //     toastLength: Toast.LENGTH_SHORT,
+                              //     gravity: ToastGravity.CENTER,
+                              //     timeInSecForIosWeb: 1,
+                              //     backgroundColor: Colors.red,
+                              //     textColor: Colors.white,
+                              //     fontSize: 16);
 
                             },
                             child: Column(
@@ -418,7 +420,7 @@ class _MyMenueState extends State<MyMenue> {
                                 context,
                                 settings:
                                 const RouteSettings(name: RoutesName.zakat),
-                                screen:  ZakatApp(),
+                                screen:  const ZakatApp(),
                                 withNavBar: true,
                                 pageTransitionAnimation:
                                 PageTransitionAnimation.cupertino,
@@ -442,9 +444,84 @@ class _MyMenueState extends State<MyMenue> {
                           )),
                         ],
                       ),
-                      // const SizedBox(
-                      //   height: 10.0,
-                      // ),
+
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: ElevatedButton(
+                                style: raisedButtonStyle,
+                                onPressed: () {
+                                  PersistentNavBarNavigator
+                                      .pushNewScreenWithRouteSettings(
+                                    context,
+                                    settings:
+                                    const RouteSettings(name: RoutesName.ayat),
+                                    screen: const HadeesOfTheDay(),
+                                    withNavBar: true,
+                                    pageTransitionAnimation:
+                                    PageTransitionAnimation.cupertino,
+                                  );
+                                },
+                                child: Column(
+                                  children:  <Widget>[
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    const Text(
+                                      'Hadith of the Day',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    const SizedBox(
+                                      height: 0.1,
+                                    ),
+                                    Image.asset('assets/hadees.png',height: 40,color: Colors.white,)
+                                    // Image.asset(
+                                    //   height: 45,
+                                    //   'assets/ayat.png',
+                                    //   color: Colors.white,
+                                    // ),
+                                  ],
+                                ),
+                              )),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                              child: ElevatedButton(
+                                style: raisedButtonStyle,
+                                onPressed: () {
+                                  PersistentNavBarNavigator
+                                      .pushNewScreenWithRouteSettings(
+                                    context,
+                                    settings:
+                                    const RouteSettings(name: RoutesName.zakat),
+                                    screen:  const IslamicDateInHistory(),
+                                    withNavBar: true,
+                                    pageTransitionAnimation:
+                                    PageTransitionAnimation.cupertino,
+                                  );
+                                },
+                                child: Column(
+                                  children: <Widget>[
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    const Text(
+                                      'Islamic History',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    const SizedBox(
+                                      height: 0.1,
+                                    ),
+                                    Image.asset('assets/calender.png',height: 40,color: Colors.white,)
+                                  ],
+                                ),
+                              )),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -472,7 +549,7 @@ class _MyMenueState extends State<MyMenue> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -577,7 +654,7 @@ class _MyMenueState extends State<MyMenue> {
 
   Widget _buildRow(IconData icon, String title, onTap,
       {bool showBadge = false}) {
-    final TextStyle tStyle = const TextStyle(color: Colors.white, fontSize: 16.0);
+    const TextStyle tStyle = TextStyle(color: Colors.white, fontSize: 16.0);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: Row(children: [
