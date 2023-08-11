@@ -7,13 +7,14 @@ import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import 'package:tasleem_al_quran/about_us_files/Noreeba_effendi.dart';
+import 'package:tasleem_al_quran/about_us_files/noreeba_effendi.dart';
 
 import 'package:tasleem_al_quran/about_us_files/iqra_asad.dart';
 import 'package:tasleem_al_quran/about_us_files/it_artificer.dart';
 
 import 'package:tasleem_al_quran/about_us_files/saad_arshad.dart';
 import 'package:tasleem_al_quran/about_us_files/sabah_malik.dart';
+import 'package:tasleem_al_quran/bottom_navigation_files/my_menue.dart';
 import 'package:tasleem_al_quran/util/picture_withdate.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -54,17 +55,8 @@ class _OurTeamState extends State<OurTeam> {
           //automaticallyImplyLeading: false,
         ),
         drawer: buildDrawer(),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.green,
-          tooltip: 'Contact Us',
-          child: Icon(
-            FontAwesomeIcons.whatsapp,
-            size: 46,
-          ),
-          onPressed: () {
-            openWhatsapp();
-          },
-        ),
+        floatingActionButton:
+        LargeFloatingActionButton(),
         body: SingleChildScrollView(
           child: Column(
             children: [

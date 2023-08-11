@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tasleem_al_quran/about_us_files/Noreeba_effendi.dart';
+import 'package:tasleem_al_quran/about_us_files/noreeba_effendi.dart';
 import 'package:tasleem_al_quran/about_us_files/ayesha_jadoon.dart';
 import 'package:tasleem_al_quran/about_us_files/iqra_asad.dart';
 import 'package:tasleem_al_quran/about_us_files/it_artificer.dart';

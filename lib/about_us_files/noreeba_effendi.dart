@@ -18,10 +18,10 @@ class NoreebaEffendi extends StatelessWidget {
         backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
         //automaticallyImplyLeading: false,
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            children: const [
+            children: [
              PicDate(),
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 20, 0, 15),

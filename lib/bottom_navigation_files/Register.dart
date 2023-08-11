@@ -8,6 +8,7 @@ import 'package:geolocator/geolocator.dart';
 
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:tasleem_al_quran/bottom_navigation_files/my_menue.dart';
 
 import 'package:tasleem_al_quran/util/picture_withdate.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -64,13 +65,8 @@ class _RegisterState extends State<Register> {
           //automaticallyImplyLeading: false,
         ),
         drawer: buildDrawer(),
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.green,
-            tooltip: 'Contact Us',
-            child: const Icon(FontAwesomeIcons.whatsapp,size: 46,),
-            onPressed: () {
-              openWhatsapp();
-            }),
+        floatingActionButton:
+         LargeFloatingActionButton(),
         body: ModalProgressHUD(
           inAsyncCall: showSpinner,
           child: SafeArea(

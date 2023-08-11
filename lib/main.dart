@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,7 @@ import 'package:flutter/material.dart';
 // import 'package:tasleem_al_quran/admin_files/user_data.dart';
 // import 'package:tasleem_al_quran/calendar.dart';
 // import 'package:tasleem_al_quran/dashboard_files/courses.dart';
-// import 'package:tasleem_al_quran/about_us_files/Noreeba_effendi.dart';
+// import 'package:tasleem_al_quran/about_us_files/noreeba_effendi.dart';
 // import 'package:tasleem_al_quran/about_us_files/ayesha_jadoon.dart';
 // import 'package:tasleem_al_quran/about_us_files/iqra_asad.dart';
 //
@@ -42,7 +41,9 @@ Future main() async {
     await Future.delayed(const Duration(seconds: -1));
   }
 
-  runApp(const MyApp());
+  runApp(MyApp(
+    key: Key('')
+  ));
 }
 
 Future initialization(BuildContext context) async {
@@ -50,7 +51,7 @@ Future initialization(BuildContext context) async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  MyApp({required Key key}) : super(key: key);
 
   //const MyApp({super.key});
 

@@ -15,6 +15,7 @@ import '../util/open_whatsapp.dart';
 import '../util/picture_withdate.dart';
 import '../util/routes_name.dart';
 import 'Register.dart';
+import 'my_menue.dart';
 
 class Courses extends StatefulWidget {
   static String id = "Courses_id";
@@ -43,14 +44,8 @@ class _CoursesState extends State<Courses> {
           //automaticallyImplyLeading: false,
         ),
         drawer: buildDrawer(),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.green,
-          tooltip: 'Contact Us',
-          child: const Icon(FontAwesomeIcons.whatsapp,size: 46,),
-          onPressed: () {
-            openWhatsapp();
-          },
-        ),
+        floatingActionButton:
+          LargeFloatingActionButton(),
         body: SingleChildScrollView(
           child: Column(
             children: [

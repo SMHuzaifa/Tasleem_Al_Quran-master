@@ -6,7 +6,7 @@ description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 1.0.21+22
+version: 1.0.24+25
 
 environment:
   sdk: '>=2.18.5 <3.0.0'
@@ -28,10 +28,10 @@ dependencies:
   #carousel_slider: ^4.2.0
 
 
-  carousel_pro: ^1.0.0
+  #carousel_pro: any
   custom_navigation_bar: ^0.8.2
   font_awesome_flutter: ^10.3.0
-  imagebutton: ^0.0.6
+ # imagebutton: any
   url_launcher: ^6.1.7
   fluttertoast: ^8.1.2
   flutter_launch: ^0.3.0
@@ -40,7 +40,7 @@ dependencies:
   flutter_qiblah: ^2.1.0
   flutter_svg: ^1.1.6
   geolocator: ^9.0.2
-  adhan: ^1.1.16
+  adhan: any
   location: ^4.4.0
   http: ^0.13.5
   modal_progress_hud_nsn: ^0.3.0
@@ -52,7 +52,7 @@ dependencies:
   firebase_storage: ^11.0.10
   cloud_firestore: ^4.3.1
   flutter_native_splash: ^2.2.17
-  intl: ^0.17.0
+  intl: any
   permission_handler: ^10.2.0
   smooth_compass: ^2.0.4
   just_audio: ^0.9.31
@@ -67,7 +67,7 @@ dependencies:
   flutter_islamic_icons: ^1.0.2
   table_calendar: ^3.0.7
   hijri_picker: ^3.0.0
-  flutter_localization: ^0.1.10
+  flutter_localization: any
   cached_network_image: ^3.2.3
   upgrader: ^6.2.0
   jhijri_picker: ^1.0.0

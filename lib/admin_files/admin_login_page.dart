@@ -9,6 +9,7 @@ import 'package:tasleem_al_quran/util/picture_withdate.dart';
 
 import 'package:tasleem_al_quran/not_used_files/slide_images.dart';
 
+import '../bottom_navigation_files/my_menue.dart';
 import '../util/open_whatsapp.dart';
 
 
@@ -106,13 +107,8 @@ class _AdminPageState extends State<AdminPage> {
           backgroundColor: const Color.fromRGBO(10, 91, 144, 1),
           //automaticallyImplyLeading: false,
         ),
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.green,
-            tooltip: 'Contact Us',
-            child: const Icon(FontAwesomeIcons.whatsapp,size: 46,),
-            onPressed: () {
-              openWhatsapp();
-            }),
+        floatingActionButton:
+     LargeFloatingActionButton(),
         body: ModalProgressHUD(
           inAsyncCall: showSpinner,
           child: SafeArea(

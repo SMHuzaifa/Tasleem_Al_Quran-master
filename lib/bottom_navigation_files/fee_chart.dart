@@ -16,6 +16,7 @@ import '../util/open_whatsapp.dart';
 
 import '../util/routes_name.dart';
 import 'Register.dart';
+import 'my_menue.dart';
 
 class Fee extends StatefulWidget {
   const Fee({Key? key}) : super(key: key);
@@ -44,14 +45,8 @@ class _FeeState extends State<Fee> {
           //automaticallyImplyLeading: false,
         ),
         drawer: buildDrawer(),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.green,
-          tooltip: 'Contact Us',
-          child: const Icon(FontAwesomeIcons.whatsapp,size: 46,),
-          onPressed: () {
-            openWhatsapp();
-          },
-        ),
+        floatingActionButton:
+LargeFloatingActionButton(),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -114,14 +109,14 @@ class _FeeState extends State<Fee> {
                   defaultColumnWidth: const FixedColumnWidth(80.0),
                   border: TableBorder.all(
                       color: Colors.black, style: BorderStyle.solid, width: 1),
-                  children: [
+                  children: const [
                     TableRow(children: [
-                      Column(children: const [
+                      Column(children: [
                         Text('S.no',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('Country',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
@@ -131,95 +126,95 @@ class _FeeState extends State<Fee> {
                       //       style: TextStyle(
                       //           fontSize: 15.0, fontWeight: FontWeight.bold))
                       // ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('Fee/Month',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('  For 2nd\n  Student',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
                     ]),
                     TableRow(children: [
-                      Column(children: const [
+                      Column(children: [
                         Text('1',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('USA', style: TextStyle(fontSize: 15.0))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('USD 50', style: TextStyle(fontSize: 15.0))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('USD 48', style: TextStyle(fontSize: 15.0))
                       ]),
                     ]),
                     TableRow(children: [
-                      Column(children: const [
+                      Column(children: [
                         Text('2',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('UK', style: TextStyle(fontSize: 15.0))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('GBP 40', style: TextStyle(fontSize: 15.0))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('GBP 38', style: TextStyle(fontSize: 15.0))
                       ]),
                     ]),
                     TableRow(children: [
-                      Column(children: const [
+                      Column(children: [
                         Text('3',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('Europe', style: TextStyle(fontSize: 15.0))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('EUR 40', style: TextStyle(fontSize: 15.0))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('EUR 38', style: TextStyle(fontSize: 15.0))
                       ]),
                     ]),
                     TableRow(children: [
-                      Column(children: const [
+                      Column(children: [
                         Text('4',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('Australia', style: TextStyle(fontSize: 15.0))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('AUD 55', style: TextStyle(fontSize: 15.0))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('AUD 53', style: TextStyle(fontSize: 15.0))
                       ]),
                     ]),
                     TableRow(children: [
-                      Column(children: const [
+                      Column(children: [
                         Text('5',
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('UAE', style: TextStyle(fontSize: 15.0))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('150 Riyal/\n  Dirham',
                             style: TextStyle(fontSize: 15.0))
                       ]),
-                      Column(children: const [
+                      Column(children: [
                         Text('130 Riyal/\n  Dirham',
                             style: TextStyle(fontSize: 15.0))
                       ]),

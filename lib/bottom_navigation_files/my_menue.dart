@@ -9,8 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:tasleem_al_quran/hadees_of_the_day.dart';
-import 'package:tasleem_al_quran/islamic_date_in_history.dart';
+
 
 import 'package:tasleem_al_quran/quran_files/screens/qari_screen.dart';
 import 'package:tasleem_al_quran/quran_files/screens/quran_screen.dart';
@@ -22,7 +21,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../admin_files/admin_login_page.dart';
 import '../admin_files/user_data.dart';
 
+import '../hadees_of_the_day.dart';
 import '../islamic_calendar.dart';
+import '../islamic_date_in_history.dart';
 import 'home.dart';
 import '../quran_files/ayat_of_the_day.dart';
 import '../namaz_timing_file/namaz_loc_check.dart';
@@ -64,14 +65,15 @@ class _MyMenueState extends State<MyMenue> {
             IconButton(
                 tooltip: "Share App",
                 onPressed: () {
+
                   Share.share(
                       "https://play.google.com/store/apps/details?id=com.taq.tasleem_al_quran");
                 },
                 icon: const Icon(Icons.share))
           ],
           centerTitle: true,
-          title: Column(
-            children: const [
+          title: const Column(
+            children: [
               Text(
                 'Tasleem Al-Quran Academy',
                 style: TextStyle(color: Colors.white, fontSize: 18),
@@ -82,14 +84,18 @@ class _MyMenueState extends State<MyMenue> {
           //automaticallyImplyLeading: false,
         ),
         drawer: buildDrawer(),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.green,
-          tooltip: 'Contact Us',
-          child: const Icon(FontAwesomeIcons.whatsapp,size: 46,),
-          onPressed: () {
-            openWhatsapp();
-          },
-        ),
+        floatingActionButton: LargeFloatingActionButton(),
+        // FloatingActionButton(
+        //   backgroundColor: Colors.green,
+        //   tooltip: 'Contact Us',
+        //   child: Padding(
+        //     padding: const EdgeInsets.all(7.0),
+        //     child: Text('Get Free Tutors Help',style: TextStyle(fontSize: 10),),
+        //   ),
+        //   onPressed: () {
+        //     openWhatsapp();
+        //   },
+        // ),
 
         body: UpgradeAlert(
           upgrader: Upgrader(shouldPopScope: () => true,
@@ -130,8 +136,8 @@ class _MyMenueState extends State<MyMenue> {
                                     PageTransitionAnimation.cupertino,
                               );
                             },
-                            child: Column(
-                              children: const <Widget>[
+                            child: const Column(
+                              children: <Widget>[
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -169,8 +175,8 @@ class _MyMenueState extends State<MyMenue> {
                                     PageTransitionAnimation.cupertino,
                               );
                             },
-                            child: Column(
-                              children: const <Widget>[
+                            child: const Column(
+                              children: <Widget>[
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -250,8 +256,8 @@ class _MyMenueState extends State<MyMenue> {
                                     PageTransitionAnimation.cupertino,
                               );
                             },
-                            child: Column(
-                              children: const <Widget>[
+                            child: const Column(
+                              children: <Widget>[
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -293,8 +299,8 @@ class _MyMenueState extends State<MyMenue> {
                                     PageTransitionAnimation.cupertino,
                               );
                             },
-                            child: Column(
-                              children: const <Widget>[
+                            child: const Column(
+                              children: <Widget>[
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -387,8 +393,8 @@ class _MyMenueState extends State<MyMenue> {
                                     PageTransitionAnimation.cupertino,
                               );
                             },
-                            child: Column(
-                              children: const <Widget>[
+                            child: const Column(
+                              children: <Widget>[
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -426,8 +432,8 @@ class _MyMenueState extends State<MyMenue> {
                                 PageTransitionAnimation.cupertino,
                               );
                             },
-                            child: Column(
-                              children: const <Widget>[
+                            child: const Column(
+                              children: <Widget>[
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -459,7 +465,7 @@ class _MyMenueState extends State<MyMenue> {
                                     context,
                                     settings:
                                     const RouteSettings(name: RoutesName.ayat),
-                                    screen: const HadeesOfTheDay(),
+                                    screen: HadeesOfTheDay(),
                                     withNavBar: true,
                                     pageTransitionAnimation:
                                     PageTransitionAnimation.cupertino,
@@ -498,7 +504,7 @@ class _MyMenueState extends State<MyMenue> {
                                     context,
                                     settings:
                                     const RouteSettings(name: RoutesName.zakat),
-                                    screen:  const IslamicDateInHistory(),
+                                    screen:  IslamicDateInHistory(),
                                     withNavBar: true,
                                     pageTransitionAnimation:
                                     PageTransitionAnimation.cupertino,
@@ -516,7 +522,7 @@ class _MyMenueState extends State<MyMenue> {
                                     const SizedBox(
                                       height: 0.1,
                                     ),
-                                    Image.asset('assets/calender.png',height: 40,color: Colors.white,)
+                                    Image.asset('assets/calendar.png',height: 40,color: Colors.white,)
                                   ],
                                 ),
                               )),
@@ -693,5 +699,43 @@ class OvalRightBorderClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;
+  }
+}
+class LargeFloatingActionButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100.0, // Set the desired width
+      height: 50.0, // Set the desired height
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(32.5), // Half of the height to make it circular
+        color: Colors.green,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 6.0,
+            spreadRadius: 2.0,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: RawMaterialButton(
+        onPressed: () {
+          openWhatsapp();
+          // Add your onPressed functionality here.
+        },
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(32.5),
+        ),
+        elevation: 0.0,
+        child: const Padding(
+          padding: EdgeInsets.only(left: 1.0),
+          child: Text(
+            'Get Free Help\n From Tutors',
+            style: TextStyle(fontSize: 12, color: Colors.white),
+          ),
+        ),
+      ),
+    );
   }
 }
