@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 //
 // import 'package:tasleem_al_quran/admin_files/user_data.dart';
 // import 'package:tasleem_al_quran/calendar.dart';
@@ -37,6 +38,8 @@ import 'package:tasleem_al_quran/util/routes_name.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  //FlutterBranchSdk.validateSDKIntegration();
+  
   Future initialization(BuildContext context) async {
     await Future.delayed(const Duration(seconds: -1));
   }

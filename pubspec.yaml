@@ -72,6 +72,7 @@ dependencies:
   upgrader: ^6.2.0
   jhijri_picker: ^1.0.0
   jhijri: ^0.0.4
+  flutter_branch_sdk: ^6.7.0
 
 
 

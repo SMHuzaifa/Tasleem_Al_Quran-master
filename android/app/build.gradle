@@ -86,4 +86,5 @@ apply plugin:  'com.google.gms.google-services'
 dependencies{
     implementation platform('com.google.firebase:firebase-bom:31.2.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'io.branch.sdk.android:library:4.+'
 }
